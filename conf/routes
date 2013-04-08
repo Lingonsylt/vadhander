@@ -1,0 +1,14 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index()
+GET     /playdocs                   controllers.Application.showPlayDocs()
+GET     /lista                      controllers.EventFeed.index()
+GET     /sok                        controllers.SearchEvents.index()
+GET     /dethander/:id              controllers.ViewEvent.index(id : Integer)
+GET     /dethander                  controllers.CreateEvent.index()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
