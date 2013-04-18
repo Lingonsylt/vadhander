@@ -1,61 +1,69 @@
 package models;
 
+import org.joda.time.DateTime;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
-
+import java.util.Date;
 
 @Entity
+//@IdClass(EventUser.class)
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "event_id", "user_id" }))
 public class Attending extends Model {
-    @Embeddable
-    public class EventUser {
-        public int event_id;
-        public int user_id;
-
-        public EventUser(int event_id, int user_id) {
-            this.user_id = user_id;
-            this.event_id = event_id;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            final EventUser other = (EventUser) obj;
-            if (!(this.user_id == other.user_id)) {
-                return false;
-            }
-            if (!(this.event_id == other.event_id)) {
-                return false;
-            }
-            return true;
-        }
-
-        @Override
-        public int hashCode() {
-            // TODO: Will this work?
-            return this.user_id * 17 + this.event_id * 23;
-        }
-    }
-
-    @EmbeddedId
+    @Id
+    int id;
+    /*@EmbeddedId
     public EventUser eventuser;
 
 
+    public EventUser getEventUser() {
+        return eventuser;
+    }*/
+
+    //@Id
+    //@JoinColumn(name="user_id")
+    @ManyToOne(optional = false)
+    public User user;
+
+    //@Id
+    //@JoinColumn(name="event_id")
+    @ManyToOne(optional = false)
+    public Event event;
+
     //@Column(name="event_id")
-    @MapsId("event_id")
+    /*@MapsId("event_id")
     @ManyToOne
     public Event event;
+
 
     @MapsId("user_id")
     @ManyToOne
     public User user;
+    */
+
+    public void setEventUser(Event event, User user) {
+        /*if (this.eventuser == null) {
+            this.eventuser = new EventUser(event, user);
+            //this.eventuser = new EventUser(event.id, user.id);
+        } else {
+            //this.eventuser.event = event;
+            //this.eventuser.user = user;
+
+            //this.eventuser.event_id = event.id;
+            //this.eventuser.user_id = user.id;
+        } */
+    }
+
+
+
+
 
     public String state;
 
+    public DateTime timestamp;
+
+    public static Finder find() {
+        return new Model.Finder(EventUser.class, Attending.class);
+    }
 
 }

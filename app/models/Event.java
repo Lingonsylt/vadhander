@@ -5,10 +5,8 @@ import play.db.ebean.Model;
 /*import com.vividsolutions.jts.geom.Point;
 import org.hibernate.annotations.Type;*/
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,7 +16,17 @@ public class Event extends Model {
 
     public String caption;
 
-    public List<String> tags;
+    //@ElementCollection
+    //@OneToMany(cascade = CascadeType.ALL)
+    public List<Tag> tags = new ArrayList<>();
+
+    //@ElementCollection
+    //public ArrayList<String> tags;
+
+    //@ElementCollection
+    //public ArrayList<String> tags = new ArrayList<String>();
+
+    //public String taggs;
 
     /*@Type(type="org.hibernate.spatial.GeometryType")
     @Column(columnDefinition="Point")
@@ -26,12 +34,18 @@ public class Event extends Model {
 
     public DateTime time_created;
 
+    @ManyToOne(optional = false)
     public User creator;
 
-    @OneToMany
-    public List<Attending> attending;
+    @OneToMany(cascade=CascadeType.ALL)
+    public List<Attending> attending; // = new ArrayList<>();
 
     @OneToMany
     public List<Comment> comments;
+
+    public static Finder find() {
+        return new Model.Finder(Integer.class, Event.class);
+    }
+
 
 }
