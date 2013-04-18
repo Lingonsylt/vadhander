@@ -22,7 +22,7 @@ public class User extends Model {
     public List<Comment> comments;
 
     @OneToMany(cascade=CascadeType.ALL)
-    public List<Attending> attending; // = new ArrayList<>();;*/
+    public List<Attending> attending;
 
     @ManyToOne(optional = false)
     public List<User> friends;

@@ -16,21 +16,11 @@ public class Event extends Model {
 
     public String caption;
 
-    //@ElementCollection
-    //@OneToMany(cascade = CascadeType.ALL)
     public List<Tag> tags = new ArrayList<>();
-
-    //@ElementCollection
-    //public ArrayList<String> tags;
-
-    //@ElementCollection
-    //public ArrayList<String> tags = new ArrayList<String>();
-
-    //public String taggs;
 
     /*@Type(type="org.hibernate.spatial.GeometryType")
     @Column(columnDefinition="Point")
-    public Point location;           */
+    public Point location;*/
 
     public DateTime time_created;
 
@@ -38,7 +28,7 @@ public class Event extends Model {
     public User creator;
 
     @OneToMany(cascade=CascadeType.ALL)
-    public List<Attending> attending; // = new ArrayList<>();
+    public List<Attending> attending;
 
     @OneToMany
     public List<Comment> comments;
