@@ -36,7 +36,6 @@ public class SearchEvents extends Controller {
     }
 
     public static Result index() {
-        // TODO retrieve list of tags from search field
         return ok(index.render());
     }
   
