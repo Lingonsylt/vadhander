@@ -9,7 +9,15 @@
     @if(event != null){
         <div>Rubrik: @event.caption</div>
         <div>Skapad: @event.time_created</div>
-        <div>Skapad av: @event.creator.name</div>
+        <div>Skapad av: @event.creator.getFullName</div>
+        <div>Latitud: @event.latitude, Longitud: @event.longitude</div>
+        <div>
+            @for(comment : Comment <- event.comments) {
+                <div>
+                    @comment.user.getFullName: @comment.text
+                </div>
+            }
+        </div>
     } else {
         Detta evenemang finns inte
     }
