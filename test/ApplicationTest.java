@@ -125,6 +125,82 @@ public class ApplicationTest {
         });
     }
 
+    @Test
+    public void testTags() {
+        running(fakeApplication(inMemoryDatabase()), new Runnable() {
+            public void run() {
+
+                User user = new User();
+                user.name = "username";
+                user.email = "user@name.com";
+
+                user.save();
+
+                // Check that the User was saved to DB
+                assertThat(User.find().all()).hasSize(1);
+
+                Event event = new Event();
+                event.caption = "event #caption";
+                event.creator = user;
+                // http://open.mapquestapi.com/nominatim/v1/search/se/Isafjordsgatan%2039,%20Kista?format=json
+                event.latitude = 59.4055219f;
+                event.longitude = 17.9448913f;
+                event.time_created = new DateTime();
+                event.save();
+
+                Event event2 = new Event();
+                event2.caption = "event #caption";
+                event2.creator = user;
+                // http://open.mapquestapi.com/nominatim/v1/search/se/Isafjordsgatan%2039,%20Kista?format=json
+                event2.latitude = 59.4055219f;
+                event2.longitude = 17.9448913f;
+                event2.time_created = new DateTime();
+
+                event2.save();
+
+                Event event3 = new Event();
+                event3.caption = "event #caption";
+                event3.creator = user;
+                // http://open.mapquestapi.com/nominatim/v1/search/se/Isafjordsgatan%2039,%20Kista?format=json
+                event3.latitude = 59.4055219f;
+                event3.longitude = 17.9448913f;
+                event3.time_created = new DateTime();
+
+                event3.save();
+
+                Tag tag = new Tag();
+                tag.text = "tagtext";
+                tag.event = event;
+                tag.save();
+
+                Tag tag2 = new Tag();
+                tag2.text = "tagtext2";
+                tag2.event = event2;
+                tag2.save();
+
+                Tag tag3 = new Tag();
+                tag3.text = "tagtext";
+                tag3.event = event;
+                tag3.save();
+
+                // Check that the event can be fetched from DB
+                List<Event> loadedEvents = Event.find().all();
+                assertThat(loadedEvents).hasSize(1);
+                Event loadedEvent = loadedEvents.get(0);
+                assertThat(loadedEvent).isNotNull();
+                assertThat(loadedEvent.tags).hasSize(1);
+
+                List<Event> foundEvents = Event.find().fetch("tags").where().eq("tags.text", "tagtext2").findList();
+                assertThat(foundEvents).hasSize(1);
+
+                foundEvents = Event.find().fetch("tags").where().eq("tags.text", "tagtext").findList();
+                assertThat(foundEvents).hasSize(2);
+
+
+            }
+        });
+    }
+
     private String executeCommand(String command) {
         Process cmdProc = null;
         String output = "";
@@ -167,6 +243,7 @@ public class ApplicationTest {
         return output;
     }
 
+    @Ignore
     @Test
     public void testPostGIS() {
         Map<String, String> settings = new HashMap<String, String>();

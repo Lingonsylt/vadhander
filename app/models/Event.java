@@ -17,6 +17,7 @@ public class Event extends Model {
 
     public String caption;
 
+    @OneToMany
     public List<Tag> tags = new ArrayList<>();
 
     /**

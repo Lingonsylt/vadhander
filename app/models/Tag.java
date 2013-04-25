@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Tag extends Model {
     @Id
+    public int id;
+
     public String text;
 
     @ManyToOne(optional = false)
