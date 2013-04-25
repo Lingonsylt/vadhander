@@ -185,16 +185,16 @@ public class ApplicationTest {
 
                 // Check that the event can be fetched from DB
                 List<Event> loadedEvents = Event.find().all();
-                assertThat(loadedEvents).hasSize(1);
+                assertThat(loadedEvents).hasSize(3);
                 Event loadedEvent = loadedEvents.get(0);
                 assertThat(loadedEvent).isNotNull();
-                assertThat(loadedEvent.tags).hasSize(1);
+                assertThat(loadedEvent.tags).hasSize(2);
 
                 List<Event> foundEvents = Event.find().fetch("tags").where().eq("tags.text", "tagtext2").findList();
                 assertThat(foundEvents).hasSize(1);
 
                 foundEvents = Event.find().fetch("tags").where().eq("tags.text", "tagtext").findList();
-                assertThat(foundEvents).hasSize(2);
+                assertThat(foundEvents).hasSize(1);
 
 
             }
@@ -243,7 +243,6 @@ public class ApplicationTest {
         return output;
     }
 
-    @Ignore
     @Test
     public void testPostGIS() {
         Map<String, String> settings = new HashMap<String, String>();
