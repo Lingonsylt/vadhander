@@ -9,7 +9,9 @@ import com.avaje.ebean.config.ServerConfig;
 import com.avaje.ebean.config.dbplatform.PostgresPlatform;
 import com.avaje.ebeaninternal.api.SpiEbeanServer;
 import com.avaje.ebeaninternal.server.ddl.DdlGenerator;
+import controllers.SearchEvents;
 import models.*;
+import org.fluentlenium.core.search.Search;
 import org.joda.time.DateTime;
 import org.junit.*;
 
@@ -33,6 +35,46 @@ public class ApplicationTest {
     public void simpleCheck() {
         int a = 1 + 1;
         assertThat(a).isEqualTo(2);
+    }
+
+    @Test
+    public void testTagSearch() {
+        running(fakeApplication(inMemoryDatabase()), new Runnable() {
+            public void run() {
+
+                User user = new User();
+                user.name = "username";
+                user.email = "user@name.com";
+                user.save();
+                assertThat(User.find().all()).hasSize(1);
+
+                Event event = new Event();
+                event.caption = "event #caption";
+                event.creator = user;
+                event.latitude = 59.4055219f;
+                event.longitude = 17.9448913f;
+                event.time_created = new DateTime();
+                event.save();
+                assertThat(Event.find().all()).hasSize(1);
+
+                Tag tag = new Tag();
+                tag.text = "foo";
+                tag.event = event;
+                tag.save();
+                assertThat(Tag.find().all()).hasSize(1);
+
+                List<String> searchTags = new ArrayList<>();
+                // search for non-existing tag
+                searchTags.add("bar");
+                Set<Event> foundEvents = SearchEvents.getEventsByTag(searchTags);
+                assertThat(foundEvents).hasSize(0);
+
+                searchTags.add("foo");
+                // search for existing tag
+                foundEvents = SearchEvents.getEventsByTag(searchTags);
+                assertThat(foundEvents).hasSize(1);
+            }
+        });
     }
 
     @Test
