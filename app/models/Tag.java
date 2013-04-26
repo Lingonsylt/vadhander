@@ -14,4 +14,8 @@ public class Tag extends Model {
 
     @ManyToOne(optional = false)
     public Event event;
+
+    public static Finder find() {
+        return new Model.Finder(Integer.class, Tag.class);
+    }
 }
