@@ -1,9 +1,9 @@
 package models;
 
-import play.Logger;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
+import java.lang.Integer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,13 +13,16 @@ public class User extends Model {
     @Id
     public int id;
 
-    public String name;
+    public String username;
+    public String firstname;
+    public String lastname;
     public String email;
+    public Integer age;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     public List<Event> created_events;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     public List<Comment> comments;
 
     @OneToMany(cascade=CascadeType.ALL)
@@ -30,10 +33,5 @@ public class User extends Model {
 
     public static Finder find() {
         return new Model.Finder(Integer.class, User.class);
-    }
-
-    public String getFullName() {
-        Logger.error("User.getFullName() is a stub!");
-        return "Fakefirstname Fakelastname";
     }
 }

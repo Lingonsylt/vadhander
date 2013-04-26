@@ -1,0 +1,38 @@
+@(userForm : Form[User])
+@vadHanderMain {
+<h2>Ny användare</h2>
+
+<form action="@routes.Application.newUser()" method="post">
+
+    @if(userForm.hasErrors()) {
+    Fel! Fyll i alla nödvändiga fält.
+    <br>
+    }
+    <div>
+        <div><label for="username">Användarnamn:</label></div>
+        <input id="username" name="username"/>
+    </div>
+
+    <div style="margin-top: 10px;">
+        <div><label for="firstname">Förnamn:</label></div>
+        <input id="firstname" name="firstname">
+    </div>
+
+    <div style="margin-top: 10px;">
+        <div><label for="lasttname">Efternamn:</label></div>
+        <input id="lasttname" name="lastname">
+    </div>
+
+    <div style="margin-top: 10px;">
+        <div><label for="lasttname">Email:</label></div>
+        <input id="email" name="email">
+    </div>
+
+    <div style="margin-top: 10px;">
+        <div><label for="lasttname">Ålder:</label></div>
+        <input id="age" name="age">
+    </div>
+
+    <input type="submit" value="Skicka" />
+</form>
+}

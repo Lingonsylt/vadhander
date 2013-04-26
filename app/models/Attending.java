@@ -1,27 +1,44 @@
 package models;
 
-import org.joda.time.DateTime;
+import play.Logger;
 import play.db.ebean.Model;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import models.Event;
+
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "event_id", "user_id" }))
+
 public class Attending extends Model {
+
     @Id
-    int id;
+    public int id;
+/*
+    public String name;
+    public String email;
+
+    @OneToMany
+    public List<Event> created_events;
+
+    @OneToMany
+    public List<Comment> comments;
+
+    @OneToMany(cascade=CascadeType.ALL)
+    public List<Attending> attending;
 
     @ManyToOne(optional = false)
-    public User user;
-
-    @ManyToOne(optional = false)
-    public Event event;
-
-    public String state;
-
-    public DateTime timestamp;
+    public List<User> friends;
 
     public static Finder find() {
-        return new Model.Finder(Integer.class, Attending.class);
+        return new Model.Finder(Integer.class, User.class);
     }
 
+    public String getFullName() {
+        Logger.error("User.getFullName() is a stub!");
+        return "Fakefirstname Fakelastname";
+    }
+    */
 }
