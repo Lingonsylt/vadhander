@@ -38,6 +38,13 @@ public class ApplicationTest {
     }
 
     @Test
+    public void parseTagTest() {
+        List<String> parsedTags = SearchEvents.stringToTagList("#foo#bar#baz");
+        assertThat(parsedTags).hasSize(3);
+        assertThat(parsedTags.get(0)).isEqualTo("foo");
+    }
+
+    @Test
     public void testTagSearch() {
         running(fakeApplication(inMemoryDatabase()), new Runnable() {
             public void run() {
