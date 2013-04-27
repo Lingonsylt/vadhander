@@ -24,12 +24,7 @@ public class SearchEvents extends Controller {
     }
 
     public static Set<Event> getEventsByTag(List<String> tags) {
-        List<Tag> foundTags = Tag.find().where().in("text",tags).findList();
-        Set<Event> foundEvents = new HashSet<Event>();
-        for (Tag t : foundTags) {
-            foundEvents.add(t.event);
-        }
-        return foundEvents;
+        return Tag.find().fetch("event").where().in("text",tags).findSet();
     }
     public static Result doSearch() {
         // retrieve search phrase
