@@ -45,6 +45,37 @@ public class ApplicationTest {
     }
 
     @Test
+    public void testUserSearch(){
+        running(fakeApplication(inMemoryDatabase()), new Runnable() {
+            public void run() {
+
+                User user = new User();
+                user.name = "username";
+                user.email = "user@name.com";
+                user.save();
+
+                Event event = new Event();
+                event.caption = "thisisaneventcaption";
+                event.creator = user;
+                event.latitude = 59.4055219f;
+                event.longitude = 17.9448913f;
+                event.time_created = new DateTime();
+                event.save();
+
+                Tag tag = new Tag();
+                tag.text = "foo";
+                tag.event = event;
+                tag.save();
+                assertThat(Tag.find().all()).hasSize(1);
+
+                List<Event> foundEvents = SearchEvents.getEventsByUser(user.id);
+                assertThat(foundEvents).hasSize(1);
+                assertThat(foundEvents.get(0).caption).isEqualTo("thisisaneventcaption");
+            }
+        });
+    }
+
+    @Test
     public void testTagSearch() {
         running(fakeApplication(inMemoryDatabase()), new Runnable() {
             public void run() {
@@ -73,7 +104,7 @@ public class ApplicationTest {
                 List<String> searchTags = new ArrayList<>();
                 // search for non-existing tag
                 searchTags.add("bar");
-                Set<Event> foundEvents = SearchEvents.getEventsByTag(searchTags);
+                List<Event> foundEvents = SearchEvents.getEventsByTag(searchTags);
                 assertThat(foundEvents).hasSize(0);
 
                 searchTags.add("foo");
