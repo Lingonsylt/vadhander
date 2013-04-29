@@ -25,9 +25,7 @@
         @if(!listOfEvents.isEmpty){
         <ul>
     @for(event : Event <- listOfEvents)  {
-<li>        @event.id <br>
-            @event.caption
-</li>
+    <li>@event.id <br> @event.caption</li>
         </div>
     }
         </ul>

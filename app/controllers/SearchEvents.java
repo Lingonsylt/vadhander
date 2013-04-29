@@ -32,21 +32,16 @@ public class SearchEvents extends Controller {
             if (!events.contains(t.event)) events.add(t.event);
         }
         return events;
-                //ArrayList<Event>(Tag.find().fetch("event").where().in("text",tags).findSet());
     }
     public static Result doSearch() {
-        // retrieve search phrase
         String input = Form.form().bindFromRequest().get("tag");
         try {
-            // find events from existing tags extracted from parsed search phrase
             List<String> parsedTags = stringToTagList(input);
             List<Event> events = getEventsByTag(parsedTags);
             // TODO display events
 
             return ok(index.render(events));
         } catch (IllegalArgumentException e) {
-            // return to search screen if invalid search input was entered
-            // TODO include error message
             return ok(index.render(null));
         }
     }
