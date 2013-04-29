@@ -19,7 +19,6 @@ import play.Logger;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.*;
-import static org.fest.assertions.Assertions.*;
 import static play.test.Helpers.fakeApplication;
 
 
