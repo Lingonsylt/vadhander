@@ -1,5 +1,6 @@
 package models;
 
+import play.Logger;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
@@ -29,5 +30,10 @@ public class User extends Model {
 
     public static Finder find() {
         return new Model.Finder(Integer.class, User.class);
+    }
+
+    public String getFullName() {
+        Logger.error("User.getFullName() is a stub!");
+        return "Fakefirstname Fakelastname";
     }
 }
