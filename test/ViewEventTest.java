@@ -7,16 +7,21 @@ import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.*;
 
 public class ViewEventTest {
+    /**
+     * Test that the rendering of an event results in the rendered page containing the event caption and comment text
+     */
     @Test
     public void testIndex() {
         running(fakeApplication(inMemoryDatabase()), new Runnable() {
             public void run() {
 
+                // Create a new user
                 User user = new User();
                 user.name = "username";
                 user.email = "user@name.com";
                 user.save();
 
+                // Create a new event with user as creator
                 Event event = new Event();
                 event.caption = "event #caption";
                 event.creator = user;
@@ -28,26 +33,32 @@ public class ViewEventTest {
                 event.save();
                 assertThat(Event.find().all()).hasSize(1);
 
+                // Add a tag to the event
                 Tag tag = new Tag();
                 tag.text = "tag text";
                 tag.event = event;
                 tag.save();
 
+                // Make the user attend the event
                 Attending attending = new Attending();
                 attending.user = user;
                 attending.event = event;
                 attending.save();
 
+                // Add a comment to the event
                 Comment comment = new Comment();
                 comment.user = user;
                 comment.text = "comment text";
                 comment.event = event;
                 comment.save();
 
+                // Call ViewEvent.index with event.id
                 Result result = callAction(
                         controllers.routes.ref.ViewEvent.index(event.id)
                 );
 
+                // Check that the rendered page contains the event caption and the comment text and that the
+                // response is a 200 OK
                 assertThat(status(result)).isEqualTo(OK);
                 assertThat(contentAsString(result)).contains(event.caption);
                 assertThat(contentAsString(result)).contains(comment.text);
