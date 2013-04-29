@@ -2,6 +2,7 @@ package controllers;
 
 import models.Event;
 import models.Tag;
+import models.User;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -21,6 +22,9 @@ public class SearchEvents extends Controller {
         List<String> output = Arrays.asList(input.split("#"));
         output = output.subList(1,output.size());
         return output;
+    }
+    public static List<Event> getEventsByUser(int id) {
+        return Event.find().where().eq("creator_id",id).findList();
     }
 
     public static Set<Event> getEventsByTag(List<String> tags) {
