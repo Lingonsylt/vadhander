@@ -11,7 +11,13 @@ object ApplicationBuild extends Build {
     // Add your project dependencies here,
     javaCore,
     javaJdbc,
-    javaEbean
+    javaEbean,
+    //"org.hibernate" % "hibernate-annotations" % "3.5.6-Final",
+    //"com.vividsolutions" % "jts" % "1.13",
+
+    //"org.postgis" %  "postgis-main" % "1.3.3",
+    //"org.postgis" % "postgis-jdbc" % "1.3.3",
+    "postgresql" % "postgresql" % "9.1-901.jdbc4"
   )
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
