@@ -40,14 +40,14 @@ public class SearchEvents extends Controller {
             List<Event> events = getEventsByTag(parsedTags);
             // TODO display events
 
-            return ok(index.render(events));
+            return ok(index.render(events,input));
         } catch (IllegalArgumentException e) {
-            return ok(index.render(null));
+            return ok(index.render(null,input));
         }
     }
 
     public static Result index() {
-        return ok(index.render(null));
+        return ok(index.render(null,""));
     }
 
 }
