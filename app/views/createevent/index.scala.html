@@ -1,7 +1,15 @@
+@(eventForm : Form[Event])
 
-@main ({
-},{
+@import helper.twitterBootstrap._
+
+@main {
+} {
     <script src="@routes.Assets.at("javascripts/createvent/main.js")" type="text/javascript"></script>
-}, {
+} {
     createvent
-})
+    @helper.form(action = routes.CreateEvent.create()) {
+        @helper.inputText(eventForm("caption"))
+
+        <input type="submit" value="Skapa event" />
+    }
+}

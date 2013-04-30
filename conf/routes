@@ -9,6 +9,7 @@ GET     /lista                      controllers.EventFeed.index()
 GET     /sok                        controllers.SearchEvents.index()
 GET     /dethander/:id              controllers.ViewEvent.index(id : Integer)
 GET     /dethander                  controllers.CreateEvent.index()
+POST    /dethander                  controllers.CreateEvent.create()
 GET     /assets/img/glyphicons-halflings-white.png      controllers.Assets.at(path="/public", file="/images/glyphicons-halflings-white.png")
 GET     /assets/img/glyphicons-halflings.png            controllers.Assets.at(path="/public", file="/images/glyphicons-halflings.png")
 
