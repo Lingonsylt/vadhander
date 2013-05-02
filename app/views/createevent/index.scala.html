@@ -4,12 +4,23 @@
 
 @main {
 } {
-    <script src="@routes.Assets.at("javascripts/createvent/main.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/createevent/main.js")" type="text/javascript"></script>
 } {
     createvent
     @helper.form(action = routes.CreateEvent.create()) {
         @helper.inputText(eventForm("caption"))
 
+        <div class="findposition"
+                data-longitude-input-selector="longitude-input"
+                data-longitude-input-selector="longitude-input"
+                data-error-message-selector=".error-message"
+                data-info-message-selector=".info-message">
+            <p class="info-message"></p>
+            <p class="error-message"></p>
+            <input type="hidden" name="longitude" class="longitude-input">
+            <input type="hidden" name="latitude" class="latitude-input">
+        </div>
         <input type="submit" value="Skapa event" />
+
     }
 }
