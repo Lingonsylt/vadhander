@@ -51,9 +51,12 @@ public class SearchEvents extends Controller {
     }
 
     public static List<String> stringToTagList(String input) {
-        if (input.equals("") || input.equals("#") || !input.startsWith("#")) throw new IllegalArgumentException("invalid search phrase");
-        List<String> output = Arrays.asList(input.split("#"));
-        output = output.subList(1,output.size());
+        List<String> output = new ArrayList<>();
+        String[] parsed = input.trim().split("#");
+        for (String s : parsed) {
+            s = s.trim();
+            if (!s.equals("")) output.add(s);
+        }
         return output;
     }
     public static List<Event> getEventsByUser(int id) {
@@ -65,6 +68,8 @@ public class SearchEvents extends Controller {
     }
 
     public static List<Event> getEventsByTag(List<String> tags) {
+        //TODO single sql query
+
         List<Tag> foundTags = Tag.find().where().in("text",tags).findList();
         Set<Event> events = new HashSet<>();
         for (Tag t : foundTags) {

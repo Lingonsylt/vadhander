@@ -44,6 +44,17 @@ public class ApplicationTest {
     }
 
     @Test
+    public void strangeInputTest() {
+        String input = " #foo ## bar# #baz   ###1  ";
+        List<String> parsedTags = SearchEvents.stringToTagList(input);
+        assertThat(parsedTags).hasSize(4);
+        assertThat(parsedTags.get(0)).isEqualTo("foo");
+        assertThat(parsedTags.get(2)).isEqualTo("baz");
+        assertThat(parsedTags.get(3)).isEqualTo("1");
+    }
+
+
+    @Test
     public void testUserSearch(){
         running(fakeApplication(inMemoryDatabase()), new Runnable() {
             public void run() {
