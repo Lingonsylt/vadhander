@@ -19,7 +19,7 @@ public class Event extends Model {
     public String description;
     public String road_description;
 
-    public List<Tag> tags = new ArrayList<>();
+    public List<Tag> tags = new ArrayList<Tag>();
 
     /**
      * Update the PostGIS coord column for this Event-object in the database based on its latitude and longitude
