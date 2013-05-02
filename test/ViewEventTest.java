@@ -30,7 +30,7 @@ public class ViewEventTest {
 
                 Tag tag = new Tag();
                 tag.text = "tag text";
-                tag.event = event;
+                tag.event.add(event);
                 tag.save();
 
                 Attending attending = new Attending();

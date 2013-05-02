@@ -52,6 +52,21 @@ public class ApplicationTest {
                 user.name = "username";
                 user.email = "user@name.com";
                 user.save();
+                assertThat(User.find().all()).hasSize(1);
+
+                User user2 = new User();
+                user2.name = "username";
+                user2.email = "user@name.com";
+                user2.save();
+
+                User user3 = new User();
+                user3.name = "user3";
+                user3.email = "user@name.com";
+                user3.save();
+
+                List<User> foundUsers = SearchEvents.getUsersByName("username");
+                assertThat(foundUsers).hasSize(2);
+
 
                 Event event = new Event();
                 event.caption = "thisisaneventcaption";
@@ -63,7 +78,7 @@ public class ApplicationTest {
 
                 Tag tag = new Tag();
                 tag.text = "foo";
-                tag.event = event;
+                tag.event.add(event);
                 tag.save();
                 assertThat(Tag.find().all()).hasSize(1);
 
@@ -96,7 +111,7 @@ public class ApplicationTest {
 
                 Tag tag = new Tag();
                 tag.text = "foo";
-                tag.event = event;
+                tag.event.add(event);
                 tag.save();
                 assertThat(Tag.find().all()).hasSize(1);
 
@@ -143,7 +158,7 @@ public class ApplicationTest {
 
                 Tag tag = new Tag();
                 tag.text = "tag text";
-                tag.event = event;
+                tag.event.add(event);
                 tag.save();
 
                 Attending attending = new Attending();
