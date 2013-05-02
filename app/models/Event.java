@@ -16,6 +16,8 @@ public class Event extends Model {
     public int id;
 
     public String caption;
+    public String description;
+    public String road_description;
 
     public List<Tag> tags = new ArrayList<Tag>();
 

@@ -1,0 +1,34 @@
+body {
+    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+    padding-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+    .navbar-fixed-top .container {
+        width: 600px;
+    }
+
+    .container {
+        width: 600px;
+    }
+}
+
+.text-unimportant {
+    color: #afafaf;
+}
+
+a.text-unimportant:hover,
+a.text-unimportant:focus {
+    color: #808080;
+}
+
+.comments {
+    list-style: none;
+}
+
+.comments li {
+    margin-bottom: 10px;
+}
+.comments .text {
+    margin-left: 10px;
+}
