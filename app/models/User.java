@@ -5,6 +5,7 @@ import play.db.ebean.Model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -35,5 +36,9 @@ public class User extends Model {
     public String getFullName() {
         Logger.error("User.getFullName() is a stub!");
         return "Fakefirstname Fakelastname";
+    }
+
+    public List<String> getFeedTags(){
+        return Arrays.asList(new String[] {"foo","bar"});
     }
 }
