@@ -14,5 +14,5 @@ public class Application extends Controller {
     public static Result showPlayDocs() {
         return ok(playdocs.render());
     }
-  
+
 }

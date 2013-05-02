@@ -17,7 +17,7 @@ public class Event extends Model {
 
     public String caption;
 
-    public List<Tag> tags = new ArrayList<>();
+    public List<Tag> tags = new ArrayList<Tag>();
 
     /**
      * Update the PostGIS coord column for this Event-object in the database based on its latitude and longitude
