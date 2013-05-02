@@ -32,3 +32,44 @@ a.text-unimportant:focus {
 .comments .text {
     margin-left: 10px;
 }
+
+.event-title-div {
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+
+    border:2px solid;
+
+    padding-left: 5px;
+    padding-right: 5px;
+
+    box-shadow: 5px 5px 3px #888888;
+
+    background: #90fa8c;
+}
+
+.event-basic-info {
+    margin-top: 20px;
+
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+
+    border: 2px solid;
+
+    padding-left: 5px;
+    padding-right: 5px;
+
+}
+
+.event-basic-info ul {
+    margin-left: 2%;
+}
+
+.event-basic-info p {
+    margin-bottom: 2px;
+}
+
+.rightfloat {
+    float: right;
+}
