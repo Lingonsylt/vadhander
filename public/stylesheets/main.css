@@ -45,10 +45,22 @@ a.text-unimportant:focus {
 
     box-shadow: 5px 5px 3px #888888;
 
-    background: #90fa8c;
+    background-image: linear-gradient(bottom, rgb(33,181,50) 28%, rgb(60,240,84) 62%);
+    background-image: -o-linear-gradient(bottom, rgb(33,181,50) 28%, rgb(60,240,84) 62%);
+    background-image: -moz-linear-gradient(bottom, rgb(33,181,50) 28%, rgb(60,240,84) 62%);
+    background-image: -webkit-linear-gradient(bottom, rgb(33,181,50) 28%, rgb(60,240,84) 62%);
+    background-image: -ms-linear-gradient(bottom, rgb(33,181,50) 28%, rgb(60,240,84) 62%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.28, rgb(33,181,50)),
+        color-stop(0.62, rgb(60,240,84))
+    );
 }
 
-.event-basic-info {
+.event-content-box {
     margin-top: 20px;
 
     border-radius: 10px;
@@ -57,9 +69,7 @@ a.text-unimportant:focus {
 
     border: 2px solid;
 
-    padding-left: 5px;
-    padding-right: 5px;
-
+    padding: 2%;
 }
 
 .event-basic-info ul {
@@ -70,6 +80,91 @@ a.text-unimportant:focus {
     margin-bottom: 2px;
 }
 
-.rightfloat {
-    float: right;
+.event-participants {
+    overflow: auto;
+
+    height: 150px;
+    width: 80%;
+
+    border: 1px #bbbbbb solid;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2%;
+
+    background: #ffffff;
+}
+
+.comment-entry-commenter {
+
+    border: 1px darkgray solid;
+
+    margin-right: 7%;
+    padding: 2%;
+
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+}
+
+.comment-entry-content {
+
+    border: 1px darkgray solid;
+
+    margin-right: 7%;
+    margin-bottom: 7%;
+    padding: 2%;
+
+    background: #d1e2ff;
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+}
+
+.write-comment {
+    border: 1px solid;
+
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+
+    margin: 0 5% 5% 5%;
+    padding-left: 4%;
+
+}
+
+.write-comment-textarea {
+    width: 90%;
+    margin-right: 2%;
+}
+
+.comment-separator-line {
+    background: darkgray;
+
+    margin: 0 5% 5% 5%;
+    height: 3px;
+}
+
+.write-comment-button {
+    margin-bottom: 4%;
+}
+
+.comments-box {
+    overflow: auto;
+
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+
+    margin-left: 5%;
+    margin-right: 5%;
+
+    height: 15em;
 }
