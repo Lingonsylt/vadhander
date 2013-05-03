@@ -36,7 +36,7 @@ public class ViewEventTest {
                 // Add a tag to the event
                 Tag tag = new Tag();
                 tag.text = "tag text";
-                tag.event = event;
+                tag.event.add(event);
                 tag.save();
 
                 // Make the user attend the event

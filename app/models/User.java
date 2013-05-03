@@ -4,8 +4,7 @@ import play.Logger;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "user_table")
@@ -15,6 +14,12 @@ public class User extends Model {
 
     public String name;
     public String email;
+
+    public Set<String> subscription;
+
+    public User() {
+        subscription = new HashSet<String>();
+    }
 
     @OneToMany
     public List<Event> created_events;
@@ -35,5 +40,9 @@ public class User extends Model {
     public String getFullName() {
         Logger.error("User.getFullName() is a stub!");
         return "Fakefirstname Fakelastname";
+    }
+
+    public List<String> getFeedTags(){
+        return new ArrayList<String>(subscription);
     }
 }

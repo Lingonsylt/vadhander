@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Event;
+import models.User;
 import play.db.ebean.Model;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -11,8 +12,10 @@ import java.util.List;
 public class EventFeed extends Controller {
   
     public static Result index() {
-        List<Event> events = new Model.Finder(Integer.class, Event.class).all();
-        return ok(index.render());
+        User u = new User();
+        u.subscription.add("foo"); u.subscription.add("bar");
+        List<Event> events = SearchEvents.getEventsByTag(u.getFeedTags());
+        return ok(index.render(events));
     }
   
 }
