@@ -4,9 +4,7 @@ import play.Logger;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "user_table")
@@ -16,6 +14,16 @@ public class User extends Model {
 
     public String name;
     public String email;
+
+    public Set<String> subscription;
+
+    public User() {
+        subscription = new HashSet<String>();
+    }
+
+    public void addSub(String sub) {
+        subscription.add(sub);
+    }
 
     @OneToMany
     public List<Event> created_events;
@@ -39,6 +47,6 @@ public class User extends Model {
     }
 
     public List<String> getFeedTags(){
-        return Arrays.asList(new String[] {"foo","bar"});
+        return new ArrayList<String>(subscription);
     }
 }

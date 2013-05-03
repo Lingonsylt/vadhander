@@ -13,6 +13,7 @@ public class EventFeed extends Controller {
   
     public static Result index() {
         User u = new User();
+        u.subscription.add("foo"); u.subscription.add("bar");
         List<Event> events = SearchEvents.getEventsByTag(u.getFeedTags());
         return ok(index.render(events));
     }
