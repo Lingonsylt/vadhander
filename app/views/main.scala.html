@@ -42,11 +42,12 @@
                 <a class="brand" href="index.htm">Vad händer?</a>
                 <div class="nav-collapse collapse" style="height: 0px;">
                     <ul class="nav">
-                        <li class="active"><a href="index.htm">Start</a></li>
-                        <li><a href="create.htm">Skapa</a></li>
-                        <li><a href="profile.htm">Profil</a></li>
-                        <li><a href="login.htm">Logga in</a></li>
-                        <li><a href="about.htm">Om oss</a></li>
+
+                        <li #{if request.action=="@routes.EventFeed.index()"}class="active"#{/if}> <a href="@routes.EventFeed.index">Start</a></li>
+                        <li #{if request.action=="@routes.CreateEvent.index()"}class="active"#{/if}> <a href="@routes.CreateEvent.index">Skapa</a></li>
+                        <li #{if request.action=="@routes.Login.index()"}class="active"#{/if}> <a href="@routes.Login.index">Logga in</a></li>
+                        <li #{if request.action=="@routes.Register.index()"}class="active"#{/if}> <a href="@routes.Register.index">Registrera</a></li>
+
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -54,6 +55,11 @@
     </div>
     <div class="container">
         @content
+
+            (@routes.EventFeed.index)
+        Det här är eventfeed.
+            #request.action
+
     </div> <!-- /container -->
 
         <!-- Le javascript
