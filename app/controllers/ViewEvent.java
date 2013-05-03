@@ -1,5 +1,6 @@
 package controllers;
 
+import models.Attending;
 import models.Comment;
 import models.Event;
 import models.User;
@@ -33,6 +34,21 @@ public class ViewEvent extends Controller {
                 "Yes it is. Yes it is...";
         fakeEvent.road_description = "Take the subway to the last stop. Then go back again.";
         fakeEvent.comments = new ArrayList<Comment>();
+
+        /*
+        // Create a list with attendants
+        fakeEvent.attending = new ArrayList<Attending>();
+        Attending attending1 = new Attending();
+        User fakeUser = new User();
+        attending1.user = fakeUser;
+        fakeEvent.attending.add(attending1);
+        */
+
+        //The time that shows for when the event is about to take place.
+        fakeEvent.event_time = "2013-06-06 15:00";
+
+        //Location for the event.
+        fakeEvent.location = "Fake location.";
 
         // Create a comment and add it to the fake event
         Comment comment = new Comment();

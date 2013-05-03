@@ -102,6 +102,11 @@ public class Event extends Model {
 
     public DateTime time_created;
 
+    public String event_time;
+
+    //Location for the event.
+    public String location;
+
     @ManyToOne(optional = false)
     public User creator;
 

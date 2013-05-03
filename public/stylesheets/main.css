@@ -69,6 +69,8 @@ a.text-unimportant:focus {
 
     border: 2px solid;
 
+    background: #bdffba;
+
     padding: 2%;
 }
 
@@ -100,7 +102,10 @@ a.text-unimportant:focus {
     border: 1px darkgray solid;
 
     margin-right: 7%;
+    margin-top: 4%;
     padding: 2%;
+
+    background: #ffffff;
 
     border-top-right-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -115,21 +120,15 @@ a.text-unimportant:focus {
     border: 1px darkgray solid;
 
     margin-right: 7%;
-    margin-bottom: 7%;
     padding: 2%;
 
     background: #d1e2ff;
-
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    -moz-border-radius-bottomleft: 5px;
-    -moz-border-radius-bottomright: 5px;
-    -webkit-border-bottom-left-radius: 5px;
-    -webkit-border-bottom-right-radius: 5px;
 }
 
 .write-comment {
     border: 1px solid;
+
+    background: #ffffff;
 
     border-radius: 10px;
     -moz-border-radius: 10px;
@@ -141,7 +140,7 @@ a.text-unimportant:focus {
 }
 
 .write-comment-textarea {
-    width: 90%;
+    width: 85%;
     margin-right: 2%;
 }
 
@@ -153,11 +152,16 @@ a.text-unimportant:focus {
 }
 
 .write-comment-button {
+    margin-top: 4%;
     margin-bottom: 4%;
 }
 
 .comments-box {
     overflow: auto;
+
+    border: 1px #bbbbbb solid;
+
+    background: #ffffff;
 
     border-radius: 10px;
     -moz-border-radius: 10px;
@@ -167,4 +171,16 @@ a.text-unimportant:focus {
     margin-right: 5%;
 
     height: 15em;
+}
+
+.comment-action-bar {
+    border-bottom-left-radius: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+
+    margin-right: 7%;
+    margin-bottom: 3%;
+    padding: 1%;
+
+    border: 1px #bbbbbb solid;
 }

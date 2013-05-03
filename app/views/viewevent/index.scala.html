@@ -12,15 +12,15 @@
             <h3>Information</h3>
             <dl>
                 <dt>Skapat av: </dt>
-                <dd><a href="#">@event.creator.getFullName</a></dd>
+                <dd>@event.creator.getFullName</dd>
                 <dt>Datum och tid: </dt>
-                <dd>ÅÅ-MM-DD HH:MM</dd>
+                <dd>@event.event_time</dd>
                 <dt>Plats: </dt>
-                <dd>Platsen - <a href="#">Visa på karta</a></dd>
-                <dd>@event.latitude, @event.longitude</dd>
+                <dd>@event.location</dd>
+                @* <dd>@event.latitude, @event.longitude</dd>  *@
             </dl>
-            <button class="btn btn-success btn-large">Delta</button>
-            <button class="btn btn-danger btn-large">Delta inte</button>
+            <!-- <button class="btn btn-success btn-large">Delta</button>
+            <button class="btn btn-danger btn-large">Delta inte</button>   -->
         </div>
 
 
@@ -41,66 +41,58 @@
             }
         </div>
 
-        <div class="event-content-box">
+       @* <div class="event-content-box">
             <h3>Deltagare</h3>
-            <h4>5st, varav 2 vänner och 1 ovän</h4>  <!-- Hitta totalt antal deltagare för ett event -->
+            <h4>@(event.attending.size())st</h4>  <!-- Hitta totalt antal deltagare för ett event -->
             <div class="event-participants">
                 <table class="table table-condensed">
-                    <tr class="success">
-                        <th>Vänner</th>
-                    </tr>
-                    <!-- För varje deltagare på ett event, gör en ny tabellrad (någon form av for-loop)
-                            istället för detta -->
-                    <tr class="success">
-                        <td><a href="#">DeltFör1 DeltEft1</a></td>
-                    </tr>
-                    <tr class="success">
-                        <td><a href="#">DeltFör5 DeltEft5</a></td>
-                    </tr>
                     <tr>
-                        <th>Ovänner</th>
+                        <th>Deltagare</th>
                     </tr>
-                    <tr class="error">
-                        <td><a href="#">DeltFör2 DeltEft2</a></td>
-                    </tr>
-                    <tr>
-                        <th>Övriga</th>
-                    </tr>
-                    <tr class="info">
-                        <td><a href="#">DeltFör3 DeltEft3</a></td>
-                    </tr>
-                    <tr class="info">
-                        <td><a href="#">DeltFör4 DeltEft4</a></td>
-                    </tr>
-                </table>
+                    @for(attending : Attending <- event.attending){
+                        <tr>
+                            <td><a href="#">@(attending.user.getFullName())</a></td>
+                        </tr>
+                    }         *@
+        <!--        </table>
             </div>
-        </div>
+        </div>  -->
 
 
-        <div class="event-content-box">
+        <!-- <div class="event-content-box">
 
             <h3>Kommentarer</h3>
 
             <div class="write-comment">
-                <h4>Skriv kommentar:</h4> <!-- Någon slags form här -->
-                <textarea rows="2" class="write-comment-textarea"></textarea>
-                <button class="btn btn-info write-comment-button">Kommentera</button>
+                <h4>Skriv kommentar:</h4>
+                <form class="form-horizontal">
+                    <textarea id="comment_text" rows="2" class="write-comment-textarea"></textarea>
+                    <input type="submit" class="btn btn-info write-comment-button" value="Kommentera"/>
+                </form>
             </div>
             <hr class="comment-separator-line">
 
             <div class="comments-box">
-                <ul class="comments">
-                    @for(comment : Comment <- event.comments) {
+                <ul class="comments">               -->
+@*                    @for(comment : Comment <- event.comments) {
                         <li>
                             <div class="comment-entry-commenter">
                                 <a href="#">@comment.user.getFullName</a>
                             </div>
-                            <div class="text comment-entry-content">@comment.text</div>
+                            <div class="text comment-entry-content">
+                                @comment.text
+                            </div>
+                            <div class="text comment-action-bar">
+                                <a href="#"><em>Svara</em></a>
+                                @if(comment.user == event.creator){ <!-- inte event.creator, utan ex. currentUser -->
+                                    <a href="#"><em>Ta bort</em></a>
+                                }
+                            </div>
                         </li>
                     }
                 </ul>
             </div>
-        </div>
+        </div>    *@
 
     } else {
         <h1>Evenmanget du letar efter går inte att hitta.</h1>
