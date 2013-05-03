@@ -27,7 +27,7 @@ public class ViewEvent extends Controller {
         fakeEvent.creator = user;
         fakeEvent.latitude = 59.4055219f;
         fakeEvent.longitude = 17.9448913f;
-        fakeEvent.time_created = new DateTime();
+        fakeEvent.timeCreated = new DateTime();
 
         fakeEvent.description = "This is a quite short fake event description. The event is gonna be awesome! " +
                 "Yes it is. Yes it is...";
