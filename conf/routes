@@ -7,9 +7,8 @@ GET     /                           controllers.Application.index()
 GET     /playdocs                   controllers.Application.showPlayDocs()
 GET     /lista                      controllers.EventFeed.index()
 GET     /sok                        controllers.SearchEvents.index()
-#remove this before release
+#/foo is for setting up test data, remove this before release
 GET     /foo                        controllers.SearchEvents.setupTestData()
-POST    /sok                        controllers.SearchEvents.doSearch()
 GET     /dethander/:id              controllers.ViewEvent.index(id : Integer)
 GET     /dethander                  controllers.CreateEvent.index()
 GET     /assets/img/glyphicons-halflings-white.png      controllers.Assets.at(path="/public", file="/images/glyphicons-halflings-white.png")

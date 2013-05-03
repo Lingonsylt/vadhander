@@ -69,7 +69,6 @@ public class SearchEvents extends Controller {
 
     public static List<Event> getEventsByTag(List<String> tags) {
         //TODO single sql query
-
         List<Tag> foundTags = Tag.find().where().in("text",tags).findList();
         Set<Event> events = new HashSet<>();
         for (Tag t : foundTags) {
@@ -78,18 +77,11 @@ public class SearchEvents extends Controller {
 
         return new ArrayList(events);
     }
-    public static Result doSearch() {
-        String input = Form.form().bindFromRequest().get("tag");
-        try {
-            List<Event> events = getEventsByTag(stringToTagList(input));
-            return ok(index.render(events,input));
-        } catch (IllegalArgumentException e) {
-            return ok(index.render(null,input));
-        }
-    }
-
     public static Result index() {
-        return ok(index.render(null,""));
+        String input = Form.form().bindFromRequest().get("tag");
+        if (input==null) return ok(index.render(null,""));
+        List<Event> events = getEventsByTag(stringToTagList(input));
+        return ok(index.render(events,input));
     }
 
 }
