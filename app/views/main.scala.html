@@ -61,7 +61,7 @@
                         <li #{if request.action=="@routes.EventFeed.index()"}class="active"#{/if}> <a href="@routes.EventFeed.index">Start</a></li>
                         <li #{if request.action=="@routes.CreateEvent.index()"}class="active"#{/if}> <a href="@routes.CreateEvent.index">Skapa</a></li>
                         <li #{if request.action=="@routes.Login.index()"}class="active"#{/if}> <a href="@routes.Login.index">Logga in</a></li>
-                        <li #{if request.action=="@routes.Register.index()"}class="active"#{/if}> <a href="@routes.Register.index">Registrera</a></li>
+                        <li #{if request.action=="@routes.NewMember.index()"}class="active"#{/if}> <a href="@routes.NewMember.index">Registrera</a></li>
 
                     </ul>
                 </div><!--/.nav-collapse -->
@@ -70,10 +70,6 @@
     </div>
     <div class="container">
         @content
-
-            (@routes.EventFeed.index)
-        Det här är eventfeed.
-            ${request.action}
 
     </div> <!-- /container -->
 

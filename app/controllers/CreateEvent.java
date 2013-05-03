@@ -18,7 +18,11 @@ public class CreateEvent extends Controller {
     {
         // TODO: Remove when user registration is complete
         User user = new User();
-        user.name = "username";
+        user.username = "username";
+        user.firstname = "firstname";
+        user.lastname = "lastname";
+        user.password = "supersecret";
+        user.birthyear = 1990;
         user.email = "user@name.com";
         user.save();
 
