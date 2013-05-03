@@ -19,6 +19,27 @@ import play.Logger;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.*;
+import static play.test.Helpers.fakeApplication;java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.EbeanServer;
+import com.avaje.ebean.config.ServerConfig;
+import com.avaje.ebean.config.dbplatform.PostgresPlatform;
+import com.avaje.ebeaninternal.api.SpiEbeanServer;
+import com.avaje.ebeaninternal.server.ddl.DdlGenerator;
+import controllers.SearchEvents;
+import models.*;
+import org.fluentlenium.core.search.Search;
+import org.joda.time.DateTime;
+import org.junit.*;
+
+import play.Logger;
+
+import static org.fest.assertions.Assertions.assertThat;
+import static play.test.Helpers.*;
 import static play.test.Helpers.fakeApplication;
 
 
@@ -146,8 +167,12 @@ public class ApplicationTest {
             public void run() {
 
                 User user = new User();
-                user.name = "username";
+                user.username = "username";
+                user.firstname = "firstname";
+                user.lastname = "lastname";
+                user.birthyear = 1999;
                 user.email = "user@name.com";
+                user.password = "password";
 
                 user.save();
 
@@ -314,8 +339,13 @@ public class ApplicationTest {
                 }
 
                 User user = new User();
-                user.name = "username";
+                user.username = "username";
+                user.firstname = "firstname";
+                user.lastname = "lastname";
+                user.birthyear = 1999;
                 user.email = "user@name.com";
+                user.password = "password";
+
                 user.save();
 
                 Event event = new Event();
