@@ -81,10 +81,7 @@ public class SearchEvents extends Controller {
     public static Result doSearch() {
         String input = Form.form().bindFromRequest().get("tag");
         try {
-            List<String> parsedTags = stringToTagList(input);
-            List<Event> events = getEventsByTag(parsedTags);
-            // TODO display events
-
+            List<Event> events = getEventsByTag(stringToTagList(input));
             return ok(index.render(events,input));
         } catch (IllegalArgumentException e) {
             return ok(index.render(null,input));

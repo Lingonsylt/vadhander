@@ -21,10 +21,6 @@ public class User extends Model {
         subscription = new HashSet<String>();
     }
 
-    public void addSub(String sub) {
-        subscription.add(sub);
-    }
-
     @OneToMany
     public List<Event> created_events;
 

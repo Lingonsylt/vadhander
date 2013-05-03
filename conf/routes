@@ -7,6 +7,7 @@ GET     /                           controllers.Application.index()
 GET     /playdocs                   controllers.Application.showPlayDocs()
 GET     /lista                      controllers.EventFeed.index()
 GET     /sok                        controllers.SearchEvents.index()
+#remove this before release
 GET     /foo                        controllers.SearchEvents.setupTestData()
 POST    /sok                        controllers.SearchEvents.doSearch()
 GET     /dethander/:id              controllers.ViewEvent.index(id : Integer)
