@@ -60,7 +60,7 @@ public class SearchEvents extends Controller {
 
     public static List<Event> getEventsByTag(List<String> tags) {
         //TODO single sql query
-        List<Tag> foundTags = Tag.find().where().in("text",tags).findList();
+        Set<Tag> foundTags = Tag.find().where().in("text",tags).findSet();
         Set<Event> events = new HashSet<>();
         for (Tag t : foundTags) {
             if (!events.contains(t.event)) events.addAll(t.event);

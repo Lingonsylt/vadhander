@@ -40,7 +40,7 @@ public class Tag extends Model {
         String[] parsed = input.trim().split("#");
         for (String s : parsed) {
             s = s.trim();
-            if (!s.equals("")) output.add(s);
+            if (!s.equals("") && !output.contains(s)) output.add(s);
         }
         return output;
     }
