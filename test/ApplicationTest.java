@@ -11,7 +11,6 @@ import com.avaje.ebeaninternal.api.SpiEbeanServer;
 import com.avaje.ebeaninternal.server.ddl.DdlGenerator;
 import controllers.SearchEvents;
 import models.*;
-import org.fluentlenium.core.search.Search;
 import org.joda.time.DateTime;
 import org.junit.*;
 
@@ -20,26 +19,8 @@ import play.Logger;
 import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.*;
 import static play.test.Helpers.fakeApplication;java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.*;
-
-import com.avaje.ebean.Ebean;
-import com.avaje.ebean.EbeanServer;
-import com.avaje.ebean.config.ServerConfig;
-import com.avaje.ebean.config.dbplatform.PostgresPlatform;
-import com.avaje.ebeaninternal.api.SpiEbeanServer;
-import com.avaje.ebeaninternal.server.ddl.DdlGenerator;
-import controllers.SearchEvents;
-import models.*;
-import org.fluentlenium.core.search.Search;
-import org.joda.time.DateTime;
-import org.junit.*;
-
-import play.Logger;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static play.test.Helpers.*;
 import static play.test.Helpers.fakeApplication;
 
 
@@ -59,7 +40,7 @@ public class ApplicationTest {
 
     @Test
     public void parseTagTest() {
-        List<String> parsedTags = SearchEvents.stringToTagList("#foo#bar#baz");
+        List<String> parsedTags = Tag.parseStringToList("#foo#bar#baz");
         assertThat(parsedTags).hasSize(3);
         assertThat(parsedTags.get(0)).isEqualTo("foo");
     }
@@ -67,7 +48,7 @@ public class ApplicationTest {
     @Test
     public void strangeInputTest() {
         String input = " #foo ## bar# #baz   ###1  ";
-        List<String> parsedTags = SearchEvents.stringToTagList(input);
+        List<String> parsedTags = Tag.parseStringToList(input);
         assertThat(parsedTags).hasSize(4);
         assertThat(parsedTags.get(0)).isEqualTo("foo");
         assertThat(parsedTags.get(2)).isEqualTo("baz");
@@ -96,7 +77,7 @@ public class ApplicationTest {
                 user3.email = "user@name.com";
                 user3.save();
 
-                List<User> foundUsers = SearchEvents.getUsersByName("username");
+                List<User> foundUsers = User.getUsersByName("username");
                 assertThat(foundUsers).hasSize(2);
 
 

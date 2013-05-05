@@ -19,6 +19,7 @@ public class Event extends Model {
     public String description;
     public String road_description;
 
+    @ManyToMany
     public List<Tag> tags = new ArrayList<Tag>();
 
     /**

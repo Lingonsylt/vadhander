@@ -54,21 +54,8 @@ public class SearchEvents extends Controller {
         return ok(index.render(null,"stuff added"));
     }
 
-    public static List<String> stringToTagList(String input) {
-        List<String> output = new ArrayList<>();
-        String[] parsed = input.trim().split("#");
-        for (String s : parsed) {
-            s = s.trim();
-            if (!s.equals("")) output.add(s);
-        }
-        return output;
-    }
     public static List<Event> getEventsByUser(int id) {
         return Event.find().where().eq("creator_id",id).findList();
-    }
-
-    public static List<User> getUsersByName(String name) {
-        return User.find().where().eq("name",name).findList();
     }
 
     public static List<Event> getEventsByTag(List<String> tags) {
@@ -84,7 +71,7 @@ public class SearchEvents extends Controller {
     public static Result index() {
         String input = Form.form().bindFromRequest().get("tag");
         if (input==null) return ok(index.render(null,""));
-        List<Event> events = getEventsByTag(stringToTagList(input));
+        List<Event> events = getEventsByTag(Tag.parseStringToList(input));
         return ok(index.render(events,input));
     }
 
