@@ -24,13 +24,14 @@
         </div>
 
 
-        <div class="event-content-box">
+        <div class="event-content-box" id="descr-div">
             @if(event.description == null && event.road_description == null) {
                 <p class="lead">Ingen beskrivning finns för detta evenemang.</p>
             } else {
                 @if(event.description != null) {
                     <h3>Beskrivning</h3>
-                    @event.description
+                    <input type="button" class="btn btn-info" value="Redigera" id="edit-button" onclick="editDescription()" />
+                    <p id="description">@event.description</p>
                 }
         </div>
         <div class="event-content-box">
@@ -98,3 +99,57 @@
         <h1>Evenmanget du letar efter går inte att hitta.</h1>
     }
 }
+
+<script>
+    function editDescription() {
+        div = document.getElementById("descr-div");
+        editButton = document.getElementById("edit-button");
+        paragraph = document.getElementById("description");
+
+        if(paragraph.innerHTML != "Det finns ingen beskrivning till eventet."){
+            var paragraphText = document.createTextNode(paragraph.innerHTML);
+        }
+        else{
+            paragraphText = document.createTextNode("");
+        }
+
+
+
+        var textArea = document.createElement("TEXTAREA");
+        textArea.appendChild(paragraphText);
+        textArea.setAttribute("rows", "8");
+        textArea.setAttribute("id", "editDescriptionTextArea");
+        div.appendChild(textArea);
+
+        editButton.setAttribute("value", "Spara");
+        editButton.setAttribute("onclick", "saveDescription()");
+
+        paragraph.parentNode.removeChild(paragraph);
+    }
+
+    function saveDescription() {
+        div = document.getElementById("descr-div");
+        saveButton = document.getElementById("edit-button");
+        textArea = document.getElementById("editDescriptionTextArea");
+
+        if(textArea.value != ""){
+            var textAreaText = document.createTextNode(textArea.value);
+        }
+        else {
+            textAreaText = document.createTextNode("Det finns ingen beskrivning till eventet.");
+        }
+
+        var paragraph = document.createElement("p");
+        paragraph.appendChild(textAreaText);
+
+        //How to set event.description to be the input of the textArea?
+
+        paragraph.setAttribute("id", "description");
+        div.appendChild(paragraph);
+
+        saveButton.setAttribute("value", "Redigera");
+        saveButton.setAttribute("onclick", "editDescription()");
+
+        textArea.parentNode.removeChild(textArea);
+    }
+</script>
