@@ -48,6 +48,10 @@ public class User extends Model {
         return new Model.Finder(Integer.class, User.class);
     }
 
+    public static List<User> getUsersByName(String name) {
+        return find().where().eq("name",name).findList();
+    }
+
     public String getFullName() {
         Logger.error("User.getFullName() is a stub!");
         return "Fakefirstname Fakelastname";

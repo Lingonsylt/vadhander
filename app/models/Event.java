@@ -19,8 +19,16 @@ public class Event extends Model {
     public String description;
     public String road_description;
 
+    @ManyToMany
     public List<Tag> tags = new ArrayList<Tag>();
 
+    public String tagString() {
+        String out = "";
+        for (Tag t : tags) {
+            out+="#"+t.text;
+        }
+        return out;
+    }
     /**
      * Update the PostGIS coord column for this Event-object in the database based on its latitude and longitude
      */

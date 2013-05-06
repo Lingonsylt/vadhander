@@ -17,8 +17,13 @@ public class ViewEventTest {
 
                 // Create a new user
                 User user = new User();
-                user.name = "username";
+                user.username = "username";
+                user.firstname = "firstname";
+                user.lastname = "lastname";
+                user.birthyear = 1999;
                 user.email = "user@name.com";
+                user.password = "password";
+
                 user.save();
 
                 // Create a new event with user as creator

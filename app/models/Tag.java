@@ -20,4 +20,28 @@ public class Tag extends Model {
     public static Finder find() {
         return new Model.Finder(Integer.class, Tag.class);
     }
+
+    public static List<Tag> getTagList(List<String> stringTags) {
+        List<Tag> tags = new ArrayList<Tag>();
+        for (String str : stringTags) {
+            Tag t = (Tag)Tag.find().where().eq("text",str).findUnique();
+            if (t==null) { // tag does not exist -> create tag
+                t = new Tag();
+                t.text = str;
+                t.save();
+            }
+            tags.add(t);
+        }
+        return tags;
+    }
+
+    public static List<String> parseStringToList(String input) {
+        List<String> output = new ArrayList<String>();
+        String[] parsed = input.toLowerCase().trim().split("#");
+        for (String s : parsed) {
+            s = s.trim();
+            if (!s.equals("") && !output.contains(s)) output.add(s);
+        }
+        return output;
+    }
 }

@@ -8,8 +8,14 @@
 } {
     <h1> Skapa nytt Event </h1>
     @helper.form(action = routes.CreateEvent.create()) {
+        <input name="eveName" placeholder="Eventnamn"><br>
+        <input name="eveDesc" placeholder="Eventbeskrivning"><br>
+        <input name="eveTags" placeholder = "Eventtaggar" > <br>
+
+        @*
         @helper.inputText(eventForm("Namn på Event"))
         @helper.inputText(eventForm("Eventbeskrivning"))
+        *@
         <input type="submit" value="Skapa event" />
     }
 }

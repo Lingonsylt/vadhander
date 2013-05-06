@@ -23,7 +23,8 @@
         @if(!listOfEvents.isEmpty){
             @for(event : Event <- listOfEvents)  {
                 <a href="" onclick="this.href=destHREF='dethander/'+@event.id;">
-                    <h4>@event.caption</h4></a><small>skapad av: @event.creator.getFullName</small>
+                    <h4>@event.caption</h4></a><small>skapad av: @event.creator.getFullName<br>
+                        @event.tagString</small>
                 </a>
             }
         } else {
