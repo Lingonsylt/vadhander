@@ -8,7 +8,8 @@
         @if(!eventFeed.isEmpty){
             @for(event : Event <- eventFeed)  {
                 <a href="" onclick="this.href=destHREF='dethander/'+@event.id;">
-                <h4>@event.caption</h4></a><small>taggar här<br>skapare här</small><br>
+                <h4>@event.caption</h4></a><small>Taggar: @event.tagString<br>
+                Skapare: @if(event.creator!=null){@event.creator.getFullName}</small><br>
             }} else {
             <p>Din feed är tom, kanske dags att skaffa nya intressen?</p>
         }

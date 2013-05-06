@@ -30,7 +30,8 @@
             } else {
                 @if(event.description != null) {
                     <h3>Beskrivning</h3>
-                    @event.description
+                    @event.description<br>
+                    <small>@event.tagString</small>
                 }
         </div>
         <div class="event-content-box">
