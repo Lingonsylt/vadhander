@@ -49,7 +49,7 @@ public class User extends Model {
     }
 
     public static List<User> getUsersByName(String name) {
-        return find().where().eq("name",name).findList();
+        return find().where().eq("username",name).findList();
     }
 
     public String getFullName() {
