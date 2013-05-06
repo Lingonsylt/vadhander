@@ -3,7 +3,7 @@ package models;
 import com.avaje.ebean.*;
 import org.joda.time.DateTime;
 import play.Logger;
-
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
@@ -15,11 +15,15 @@ public class Event extends Model {
     @Id
     public int id;
 
+    @Required
     public String caption;
+
     public String description;
     public String road_description;
 
-    public List<Tag> tags = new ArrayList<>();
+    @OneToMany
+    public List<Tag> tags;
+    //public List<String> tagtest = new ArrayList<>();
 
     /**
      * Update the PostGIS coord column for this Event-object in the database based on its latitude and longitude
@@ -100,8 +104,8 @@ public class Event extends Model {
         return query.findList();
     }
 
-    public DateTime time_created;
-
+    public DateTime timeCreated;
+    public DateTime eventTime;
     @ManyToOne(optional = false)
     public User creator;
 
@@ -111,6 +115,13 @@ public class Event extends Model {
     @OneToMany
     public List<Comment> comments;
 
+   /* public String getTags(){
+        tags.add("test");
+        tags.add("test2");
+        tagtest;
+        String json = (new JSONArray(tagtest)).toString();
+        return  json;
+    }      */
     public static Finder find() {
         return new Model.Finder(Integer.class, Event.class);
     }

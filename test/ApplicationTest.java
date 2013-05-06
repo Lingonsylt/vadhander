@@ -55,7 +55,7 @@ public class ApplicationTest {
                 event.latitude = 59.4055219f;
                 event.longitude = 17.9448913f;
                 assertThat(event.tags).as("event.tags").isNotNull();
-                event.time_created = new DateTime();
+                event.timeCreated = new DateTime();
 
                 event.save();
                 // Check that the Event was saved to DB

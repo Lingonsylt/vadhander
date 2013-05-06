@@ -25,7 +25,7 @@
         <p class="text-right text-unimportant">
             @event.latitude, @event.longitude
         </p>
-        <p class="text-right"><small class="text-unimportant">Skapad av <span class="text-info">@event.creator.getFullName</span>, @event.time_created</small></p>
+        <p class="text-right"><small class="text-unimportant">Skapad av <span class="text-info">@event.creator.getFullName</span>, @event.timeCreated</small></p>
         <h3>Kommentarer</h3>
         <ul class="comments">
             @for(comment : Comment <- event.comments) {
