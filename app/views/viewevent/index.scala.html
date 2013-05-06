@@ -24,20 +24,24 @@
         </div>
 
 
-        <div class="event-content-box">
+        <div class="event-content-box" id="description-div">
             @if(event.description == null && event.road_description == null) {
                 <p class="lead">Ingen beskrivning finns för detta evenemang.</p>
             } else {
                 @if(event.description != null) {
                     <h3>Beskrivning</h3>
-                    @event.description<br>
+                    <input type="button" class="btn btn-info" value="Redigera" id="edit-description-button"
+                        onclick="editDescription()" />
+                    <p id="description">@event.description</p>
                     <small>@event.tagString</small>
                 }
         </div>
-        <div class="event-content-box">
+        <div class="event-content-box" id="road-description-div">
                 @if(event.road_description != null) {
                     <h3>Vägbeskrivning</h3>
-                    @event.road_description
+                    <input type="button" class="btn btn-info" value="Redigera" id="edit-road-description-button"
+                        onclick="editRoadDescription()" />
+                    <p id="road-description">@event.road_description</p>
                 }
             }
         </div>
@@ -99,3 +103,4 @@
         <h1>Evenmanget du letar efter går inte att hitta.</h1>
     }
 }
+
