@@ -89,9 +89,7 @@ public class ApplicationTest {
                 event.time_created = new DateTime();
                 event.save();
 
-                Tag tag = new Tag();
-                tag.text = "foo";
-                tag.event.add(event);
+                Tag tag = new Tag("foo",event);
                 tag.save();
                 assertThat(Tag.find().all()).hasSize(1);
 
@@ -122,9 +120,7 @@ public class ApplicationTest {
                 event.save();
                 assertThat(Event.find().all()).hasSize(1);
 
-                Tag tag = new Tag();
-                tag.text = "foo";
-                tag.event.add(event);
+                Tag tag = new Tag("foo",event);
                 tag.save();
                 assertThat(Tag.find().all()).hasSize(1);
 
@@ -173,9 +169,8 @@ public class ApplicationTest {
                 // Check that the Event was saved to DB
                 assertThat(Event.find().all()).hasSize(1);
 
-                Tag tag = new Tag();
-                tag.text = "tag text";
-                tag.event.add(event);
+                Tag tag = new Tag("tag text",event);
+
                 tag.save();
 
                 Attending attending = new Attending();

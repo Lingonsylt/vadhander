@@ -39,9 +39,7 @@ public class ViewEventTest {
                 assertThat(Event.find().all()).hasSize(1);
 
                 // Add a tag to the event
-                Tag tag = new Tag();
-                tag.text = "tag text";
-                tag.event.add(event);
+                Tag tag = new Tag("tag text", event);
                 tag.save();
 
                 // Make the user attend the event

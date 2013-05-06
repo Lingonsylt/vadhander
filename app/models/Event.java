@@ -19,7 +19,7 @@ public class Event extends Model {
     public String description;
     public String road_description;
 
-    @ManyToMany
+    @OneToMany(cascade = CascadeType.ALL)
     public List<Tag> tags = new ArrayList<Tag>();
 
     public String tagString() {
