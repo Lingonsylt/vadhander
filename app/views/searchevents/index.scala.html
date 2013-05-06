@@ -1,7 +1,38 @@
+@(listOfEvents: List[Event])(input: String)
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Eventsökning</title>
+</head>
+
 @main {
+<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/searchevents.css")">
+
 } {
-    <script src="@routes.Assets.at("javascripts/eventfeed/main.js")" type="text/javascript"></script>
+<script src="@routes.Assets.at("javascripts/searchevents/main.js")" type="text/javascript"></script>
 } {
-<h1>Sök Event</h1>
-<p>Sök event.<br></p>
+<body>
+<h2>Hitta evenemang</h2>
+<form action="sok" method="get">
+    <div id = searchField>
+        <input id="tag" name="tag" value="@input" placeholder = "#tag"/>
+        <input type="submit" value="Sök" />
+    </div>  <br>
+</form>
+    @if(listOfEvents!= null) {
+        @if(!listOfEvents.isEmpty){
+            @for(event : Event <- listOfEvents)  {
+                <a href="" onclick="this.href=destHREF='dethander/'+@event.id;">
+                    <h4>@event.caption</h4></a><small>skapad av: @event.creator.getFullName<br>
+                        @event.tagString</small>
+                </a>
+            }
+        } else {
+        <p>Inga evenemang funna</p>
+        }
+     }
+</body>
+
+
 }
+</html>

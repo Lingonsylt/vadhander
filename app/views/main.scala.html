@@ -5,6 +5,21 @@
 <head>
     <title>Vad händer?</title>
 
+    <script src="@routes.Assets.at("javascripts/jquery.js")"></script>
+    <script src="@routes.Assets.at("javascripts/bootstrap.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/bootstrap-transition.js")"></script>
+    <script src="@routes.Assets.at("javascripts/bootstrap-alert.js")"></script>
+    <script src="@routes.Assets.at("javascripts/bootstrap-modal.js")"></script>
+    <script src="@routes.Assets.at("javascripts/bootstrap-dropdown.js")"></script>
+    <script src="@routes.Assets.at("javascripts/bootstrap-scrollspy.js")"></script>
+    <script src="@routes.Assets.at("javascripts/bootstrap-tab.js")"></script>
+    <script src="@routes.Assets.at("javascripts/bootstrap-tooltip.js")"></script>
+    <script src="@routes.Assets.at("javascripts/bootstrap-popover.js")"></script>
+    <script src="@routes.Assets.at("javascripts/bootstrap-button.js")"></script>
+    <script src="@routes.Assets.at("javascripts/bootstrap-collapse.js")"></script>
+    <script src="@routes.Assets.at("javascripts/bootstrap-carousel.js")"></script>
+    <script src="@routes.Assets.at("javascripts/bootstrap-typeahead.js")"></script>
+    <script src="@routes.Assets.at("javascripts/register/main.js")" type="text/javascript"></script>
 
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap-responsive.css")">
@@ -46,7 +61,7 @@
                         <li #{if request.action=="@routes.EventFeed.index()"}class="active"#{/if}> <a href="@routes.EventFeed.index">Start</a></li>
                         <li #{if request.action=="@routes.CreateEvent.index()"}class="active"#{/if}> <a href="@routes.CreateEvent.index">Skapa</a></li>
                         <li #{if request.action=="@routes.Login.index()"}class="active"#{/if}> <a href="@routes.Login.index">Logga in</a></li>
-                        <li #{if request.action=="@routes.Register.index()"}class="active"#{/if}> <a href="@routes.Register.index">Registrera</a></li>
+                        <li #{if request.action=="@routes.NewMember.index()"}class="active"#{/if}> <a href="@routes.NewMember.index">Registrera</a></li>
 
                     </ul>
                 </div><!--/.nav-collapse -->
@@ -56,29 +71,11 @@
     <div class="container">
         @content
 
-            (@routes.EventFeed.index)
-        Det här är eventfeed.
-            ${request.action}
-
     </div> <!-- /container -->
 
         <!-- Le javascript
 ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
 
-    <script src="@routes.Assets.at("javascripts/jquery.js")"></script>
-    <script src="@routes.Assets.at("javascripts/bootstrap.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("javascripts/bootstrap-transition.js")"></script>
-    <script src="@routes.Assets.at("javascripts/bootstrap-alert.js")"></script>
-    <script src="@routes.Assets.at("javascripts/bootstrap-modal.js")"></script>
-    <script src="@routes.Assets.at("javascripts/bootstrap-dropdown.js")"></script>
-    <script src="@routes.Assets.at("javascripts/bootstrap-scrollspy.js")"></script>
-    <script src="@routes.Assets.at("javascripts/bootstrap-tab.js")"></script>
-    <script src="@routes.Assets.at("javascripts/bootstrap-tooltip.js")"></script>
-    <script src="@routes.Assets.at("javascripts/bootstrap-popover.js")"></script>
-    <script src="@routes.Assets.at("javascripts/bootstrap-button.js")"></script>
-    <script src="@routes.Assets.at("javascripts/bootstrap-collapse.js")"></script>
-    <script src="@routes.Assets.at("javascripts/bootstrap-carousel.js")"></script>
-    <script src="@routes.Assets.at("javascripts/bootstrap-typeahead.js")"></script>
 </body>
 </html>

@@ -9,6 +9,7 @@ import com.avaje.ebean.config.ServerConfig;
 import com.avaje.ebean.config.dbplatform.PostgresPlatform;
 import com.avaje.ebeaninternal.api.SpiEbeanServer;
 import com.avaje.ebeaninternal.server.ddl.DdlGenerator;
+import controllers.SearchEvents;
 import models.*;
 import org.joda.time.DateTime;
 import org.junit.*;
@@ -17,6 +18,9 @@ import play.Logger;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.*;
+import static play.test.Helpers.fakeApplication;java.io.BufferedReader;
+
+import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.fakeApplication;
 
 
@@ -35,13 +39,121 @@ public class ApplicationTest {
     }
 
     @Test
-    public void testRelations() {
+    public void parseTagTest() {
+        List<String> parsedTags = Tag.parseStringToList("#foo#bar#baz");
+        assertThat(parsedTags).hasSize(3);
+        assertThat(parsedTags.get(0)).isEqualTo("foo");
+    }
+
+    @Test
+    public void strangeInputTest() {
+        String input = " #foo ## bar# #baz   ###1  ";
+        List<String> parsedTags = Tag.parseStringToList(input);
+        assertThat(parsedTags).hasSize(4);
+        assertThat(parsedTags.get(0)).isEqualTo("foo");
+        assertThat(parsedTags.get(2)).isEqualTo("baz");
+        assertThat(parsedTags.get(3)).isEqualTo("1");
+    }
+
+
+    @Test
+    public void testUserSearch(){
         running(fakeApplication(inMemoryDatabase()), new Runnable() {
             public void run() {
 
                 User user = new User();
                 user.name = "username";
                 user.email = "user@name.com";
+                user.save();
+                assertThat(User.find().all()).hasSize(1);
+
+                User user2 = new User();
+                user2.name = "username";
+                user2.email = "user@name.com";
+                user2.save();
+
+                User user3 = new User();
+                user3.name = "user3";
+                user3.email = "user@name.com";
+                user3.save();
+
+                List<User> foundUsers = User.getUsersByName("username");
+                assertThat(foundUsers).hasSize(2);
+
+
+                Event event = new Event();
+                event.caption = "thisisaneventcaption";
+                event.creator = user;
+                event.latitude = 59.4055219f;
+                event.longitude = 17.9448913f;
+                event.time_created = new DateTime();
+                event.save();
+
+                Tag tag = new Tag();
+                tag.text = "foo";
+                tag.event.add(event);
+                tag.save();
+                assertThat(Tag.find().all()).hasSize(1);
+
+                List<Event> foundEvents = SearchEvents.getEventsByUser(user.id);
+                assertThat(foundEvents).hasSize(1);
+                assertThat(foundEvents.get(0).caption).isEqualTo("thisisaneventcaption");
+            }
+        });
+    }
+
+    @Test
+    public void testTagSearch() {
+        running(fakeApplication(inMemoryDatabase()), new Runnable() {
+            public void run() {
+
+                User user = new User();
+                user.name = "username";
+                user.email = "user@name.com";
+                user.save();
+                assertThat(User.find().all()).hasSize(1);
+
+                Event event = new Event();
+                event.caption = "event #caption";
+                event.creator = user;
+                event.latitude = 59.4055219f;
+                event.longitude = 17.9448913f;
+                event.time_created = new DateTime();
+                event.save();
+                assertThat(Event.find().all()).hasSize(1);
+
+                Tag tag = new Tag();
+                tag.text = "foo";
+                tag.event.add(event);
+                tag.save();
+                assertThat(Tag.find().all()).hasSize(1);
+
+                List<String> searchTags = new ArrayList<>();
+                // search for non-existing tag
+                searchTags.add("bar");
+                List<Event> foundEvents = SearchEvents.getEventsByTag(searchTags);
+                assertThat(foundEvents).hasSize(0);
+
+                searchTags.add("foo");
+                // search for existing tag
+                foundEvents = SearchEvents.getEventsByTag(searchTags);
+                assertThat(foundEvents).hasSize(1);
+            }
+        });
+    }
+
+    @Test
+    public void testRelations() {
+        running(fakeApplication(inMemoryDatabase()), new Runnable() {
+            public void run() {
+
+                User user = new User();
+                user.username = "username";
+                user.firstname = "firstname";
+                user.lastname = "lastname";
+                user.birthyear = 1999;
+                user.email = "user@name.com";
+                user.password = "password";
 
                 user.save();
 
@@ -63,7 +175,7 @@ public class ApplicationTest {
 
                 Tag tag = new Tag();
                 tag.text = "tag text";
-                tag.event = event;
+                tag.event.add(event);
                 tag.save();
 
                 Attending attending = new Attending();
@@ -208,8 +320,13 @@ public class ApplicationTest {
                 }
 
                 User user = new User();
-                user.name = "username";
+                user.username = "username";
+                user.firstname = "firstname";
+                user.lastname = "lastname";
+                user.birthyear = 1999;
                 user.email = "user@name.com";
+                user.password = "password";
+
                 user.save();
 
                 Event event = new Event();

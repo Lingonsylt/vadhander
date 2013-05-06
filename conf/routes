@@ -7,12 +7,14 @@ GET     /                           controllers.Application.index()
 GET     /playdocs                   controllers.Application.showPlayDocs()
 GET     /lista                      controllers.EventFeed.index()
 GET     /sok                        controllers.SearchEvents.index()
+#/foo is for setting up test data, remove this before release
+GET     /foo                        controllers.SearchEvents.setupTestData()
 GET     /dethander/:id              controllers.ViewEvent.index(id : Integer)
 GET     /dethander                  controllers.CreateEvent.index()
 POST    /dethander                  controllers.CreateEvent.create()
 GET     /login                      controllers.Login.index()
-GET     /register                   controllers.Register.index()
-
+GET     /nymedlem                   controllers.NewMember.index()
+POST    /nymedlem                   controllers.NewMember.createUser()
 GET     /assets/img/glyphicons-halflings-white.png      controllers.Assets.at(path="/public", file="/images/glyphicons-halflings-white.png")
 GET     /assets/img/glyphicons-halflings.png            controllers.Assets.at(path="/public", file="/images/glyphicons-halflings.png")
 

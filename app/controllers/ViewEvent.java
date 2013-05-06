@@ -18,7 +18,7 @@ public class ViewEvent extends Controller {
     private static Event getFakeEvent(int id) {
         // Create a user
         User user = new User();
-        user.name = "username";
+        user.username = "username";
         user.email = "user@name.com";
 
         // Create an event, with user as creator
