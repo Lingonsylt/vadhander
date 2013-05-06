@@ -9,14 +9,45 @@
 
         @helper.form(action = routes.NewMember.createUser()) {
 
-        @helper.inputText(userForm("username"))
-        @helper.inputText(userForm("firstname"))
-        @helper.inputText(userForm("lastname"))
-        @helper.inputText(userForm("birthyear"))
-        @helper.inputText(userForm("email"))
-        @helper.inputText(userForm("password"))
-                <!--@helper.inputText(field = userForm("caption"), '_label -> "Account Name: ", 'placeholder-> "Test")-->
 
+            @helper.inputText(userForm("Användarnamn"),
+                '_showConstraints -> false,
+                '_label -> Messages("username"),
+                'type -> "username"
+            )
+
+            @helper.inputText(userForm("Namn"),
+                '_showConstraints -> false,
+                '_label -> Messages("firstname"),
+                'type -> "firstname"
+            )
+
+
+            @helper.inputText(userForm("Efternamn"),
+                '_showConstraints -> false,
+                '_label -> Messages("lastname"),
+                'type -> "lastname"
+            )
+
+            @helper.inputText(userForm("Födelseår"),
+                '_showConstraints -> false,
+                '_label -> Messages("birthyear"),
+                'type -> "birthyear"
+            )
+
+
+            @helper.inputText(userForm("Email"),
+                '_showConstraints -> false,
+                '_label -> Messages("email"),
+                'type -> "email"
+            )
+
+
+            @helper.inputText(userForm("Lösenord"),
+                '_showConstraints -> false,
+                '_label -> Messages("password"),
+                'type -> "password"
+            )
 
             <input type="submit" value="Skicka" />
         }
