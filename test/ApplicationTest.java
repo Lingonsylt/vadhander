@@ -128,7 +128,7 @@ public class ApplicationTest {
                 tag.save();
                 assertThat(Tag.find().all()).hasSize(1);
 
-                List<String> searchTags = new ArrayList<>();
+                List<String> searchTags = new ArrayList<String>();
                 // search for non-existing tag
                 searchTags.add("bar");
                 List<Event> foundEvents = SearchEvents.getEventsByTag(searchTags);
