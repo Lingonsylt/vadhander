@@ -37,27 +37,24 @@
         </span>
     </div>
 
-     <script type="text/javascript">
-         $('#timepicker').timepicker({
-         minuteStep: 1,
-         template: 'modal',
-         showSeconds: false,
-         showMeridian: false
-         });
-     </script>
-
-     <div class="findposition"
-     data-longitude-input-selector="longitude-input"
-     data-longitude-input-selector="longitude-input"
-     data-error-message-selector=".error-message"
-     data-info-message-selector=".info-message">
-        <p class="info-message"></p>
-        <p class="error-message"></p>
-        <input type="hidden" name="longitude" class="longitude-input">
-        <input type="hidden" name="latitude" class="latitude-input">
-     </div>
-     <input type="submit" value="Skapa event" />
-
-
+    <script type="text/javascript">
+        $('#timepicker').timepicker({
+        minuteStep: 1,
+        template: 'modal',
+        showSeconds: false,
+        showMeridian: false
+        });
+    </script>
+    <div class="findposition"
+            data-longitude-input-selector="longitude-input"
+            data-longitude-input-selector="longitude-input"
+            data-error-message-selector=".error-message"
+            data-info-message-selector=".info-message">
+       <p class="info-message"></p>
+       <p class="error-message"></p>
+       <input type="hidden" name="longitude" class="longitude-input">
+       <input type="hidden" name="latitude" class="latitude-input">
+    </div>
+    <input type="submit" value="Skapa event" />
     }
 }
