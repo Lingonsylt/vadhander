@@ -18,7 +18,7 @@ import play.Logger;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.*;
-import static play.test.Helpers.fakeApplication;java.io.BufferedReader;
+import static play.test.Helpers.fakeApplication;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static play.test.Helpers.fakeApplication;
@@ -62,18 +62,18 @@ public class ApplicationTest {
             public void run() {
 
                 User user = new User();
-                user.name = "username";
+                user.username = "username";
                 user.email = "user@name.com";
                 user.save();
                 assertThat(User.find().all()).hasSize(1);
 
                 User user2 = new User();
-                user2.name = "username";
+                user2.username = "username";
                 user2.email = "user@name.com";
                 user2.save();
 
                 User user3 = new User();
-                user3.name = "user3";
+                user3.username = "user3";
                 user3.email = "user@name.com";
                 user3.save();
 
@@ -108,7 +108,7 @@ public class ApplicationTest {
             public void run() {
 
                 User user = new User();
-                user.name = "username";
+                user.username = "username";
                 user.email = "user@name.com";
                 user.save();
                 assertThat(User.find().all()).hasSize(1);
@@ -128,7 +128,7 @@ public class ApplicationTest {
                 tag.save();
                 assertThat(Tag.find().all()).hasSize(1);
 
-                List<String> searchTags = new ArrayList<>();
+                List<String> searchTags = new ArrayList<String>();
                 // search for non-existing tag
                 searchTags.add("bar");
                 List<Event> foundEvents = SearchEvents.getEventsByTag(searchTags);

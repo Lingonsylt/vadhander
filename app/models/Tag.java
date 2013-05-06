@@ -14,7 +14,7 @@ public class Tag extends Model {
     @ManyToMany
     public List<Event> event;
     public Tag(){
-        event = new ArrayList<>();
+        event = new ArrayList<Event>();
     }
 
     public static Finder find() {
