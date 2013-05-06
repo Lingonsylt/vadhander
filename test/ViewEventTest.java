@@ -28,7 +28,7 @@ public class ViewEventTest {
                 // http://open.mapquestapi.com/nominatim/v1/search/se/Isafjordsgatan%2039,%20Kista?format=json
                 event.latitude = 59.4055219f;
                 event.longitude = 17.9448913f;
-                event.time_created = new DateTime();
+                event.timeCreated = new DateTime();
 
                 event.save();
                 assertThat(Event.find().all()).hasSize(1);

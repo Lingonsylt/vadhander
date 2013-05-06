@@ -91,7 +91,7 @@ public class Event extends Model {
                 .columnMapping("caption",  "caption")
                 .columnMapping("latitude",  "latitude")
                 .columnMapping("longitude",  "longitude")
-                .columnMapping("time_created",  "time_created")
+                .columnMapping("time_created",  "timeCreated")
                 .columnMapping("creator_id",  "creator.id")
                 .columnMapping("distance",  "distance")
                 .create();

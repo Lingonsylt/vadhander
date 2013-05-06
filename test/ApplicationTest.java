@@ -54,7 +54,6 @@ public class ApplicationTest {
                 // http://open.mapquestapi.com/nominatim/v1/search/se/Isafjordsgatan%2039,%20Kista?format=json
                 event.latitude = 59.4055219f;
                 event.longitude = 17.9448913f;
-                assertThat(event.tags).as("event.tags").isNotNull();
                 event.timeCreated = new DateTime();
 
                 event.save();
@@ -215,7 +214,7 @@ public class ApplicationTest {
                 Event event = new Event();
                 event.caption = "free #beer at antons place";
                 event.creator = user;
-                event.time_created = new DateTime();
+                event.timeCreated = new DateTime();
                 // http://open.mapquestapi.com/nominatim/v1/search/se/J%C3%A4ringegr%C3%A4nd%2017,%20Stockholm?format=json
                 event.latitude = 59.3948344f;
                 event.longitude = 17.8929762f;
@@ -224,7 +223,7 @@ public class ApplicationTest {
                 Event event2 = new Event();
                 event2.caption = "free #beer at foo bar";
                 event2.creator = user;
-                event2.time_created = new DateTime();
+                event2.timeCreated = new DateTime();
                 // http://open.mapquestapi.com/nominatim/v1/search/se/Isafjordsgatan%2039,%20Kista?format=json
                 event2.latitude = 59.4055219f;
                 event2.longitude = 17.9448913f;
