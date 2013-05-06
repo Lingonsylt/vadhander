@@ -36,8 +36,8 @@ public class Tag extends Model {
     }
 
     public static List<String> parseStringToList(String input) {
-        List<String> output = new ArrayList<>();
-        String[] parsed = input.trim().split("#");
+        List<String> output = new ArrayList<String>();
+        String[] parsed = input.toLowerCase().trim().split("#");
         for (String s : parsed) {
             s = s.trim();
             if (!s.equals("") && !output.contains(s)) output.add(s);
