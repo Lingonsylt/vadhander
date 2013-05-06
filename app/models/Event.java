@@ -17,12 +17,14 @@ public class Event extends Model {
 
     @Required
     public String caption;
-
+    @Required
     public String description;
     public String road_description;
 
     @OneToMany
     public List<Tag> tags;
+
+    public List<String> taggar = new ArrayList<>();
     //public List<String> tagtest = new ArrayList<>();
 
     /**
@@ -103,7 +105,9 @@ public class Event extends Model {
         // Return the result of the query as a list of Event-objects with the .distance property set
         return query.findList();
     }
-
+    public void addTag(String tag){
+        taggar.add(tag);
+    }
     public DateTime timeCreated;
     public DateTime eventTime;
     @ManyToOne(optional = false)

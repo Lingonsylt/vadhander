@@ -10,28 +10,28 @@
     @helper.form(action = routes.CreateEvent.create()) {
         @helper.inputText(eventForm("caption"), '_label -> "Beskrivning")
 
+        @helper.inputText(eventForm("caption"), '_label -> "", 'placeholder -> "Namn")
+        @views.html.helper.textarea(field = eventForm("description"), args = 'rows -> 5, 'cols -> 50, '_label -> "", 'placeholder -> "Beskrivning")
 
-    <input type="text" name="tags" placeholder="Taggar" class="tagManager"/><script>
+
+
+
+    <input type="text" name="taggar" placeholder="Taggar" class="tagManager"/>
     <script>
-        jQuery(".tagManager").tagsManager({
-        typeahead: true,
-        typeaheadAjaxSource: '/ajax/countries',
-        typeaheadAjaxPolling: true,
-        AjaxPush: '/ajax/countries/push'
-        });
+        $(".tagManager").tagsManager(
+
+        );
     </script>
 
-
-    <div data-date-format="dd-mm-yyyy" data-date="11:22" id="dp3"class="input-append date" autoclose="true">
-        <input type="text" value="test231" size="16" class="span2">
+    <br><div data-date-format="dd-mm-yyyy" data-date="04-05-2013" id="dp3"class="input-append date" autoclose="true">
+        <input type="text" value="04-05-2013" size="16" class="datepicker-dropdown" viewMode='days'>
         <span class="add-on"><i class="icon-calendar"></i></span>
     <script type="text/javascript">
         $('#datepicker').datepicker('show');
-
     </script>
 
     <div class="input-append bootstrap-timepicker">
-        <input id="timepicker" type="text" class="input-small">
+        <input id="timepicker" value="10:30" type="text" class="input-small">
         <span class="add-on">
             <i class="icon-time"></i>
         </span>
