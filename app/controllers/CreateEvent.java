@@ -50,7 +50,7 @@ public class CreateEvent extends Controller {
             t.save();
         }
 
-        return ViewEvent.index(newEvent.id); // send user to the newly created event's view
+        return redirect(routes.ViewEvent.index(newEvent.id)); // send user to the newly created event's view
     }
   
 }
