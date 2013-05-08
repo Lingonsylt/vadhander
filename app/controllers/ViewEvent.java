@@ -4,6 +4,7 @@ import models.Attending;
 import models.Comment;
 import models.Event;
 import models.User;
+import org.codehaus.jackson.JsonNode;
 import org.joda.time.DateTime;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -15,6 +16,13 @@ public class ViewEvent extends Controller {
     /**
      * Create a fake event for use by ViewEvent.index, until CreateEvent is finished.
      */
+
+    public static Result attend(int id){
+        Event e = (Event)Event.find().byId(id);
+        e.attend();
+        return ok("New user attending event "+id);
+    }
+
     private static Event getFakeEvent(int id) {
         // Create a user
         User user = new User();
@@ -80,6 +88,42 @@ public class ViewEvent extends Controller {
 
         // Render index with the event, letting it handle it if event is null
         return ok(index.render(event));
+    }
+
+    public static Result saveDescription(int id) {
+        String eventDescription = null;
+        JsonNode json = request().body().asJson();
+        if(json == null) {
+            return badRequest("Expecting Json data");
+        } else {
+            eventDescription = json.findPath("description").getTextValue();
+            if(eventDescription == null) {
+                return badRequest("Missing parameter [description]");
+            }
+        }
+
+        Event event = (Event)Event.find().byId(id);
+        event.description = eventDescription;
+        event.save();
+        return ok("Saved: " + eventDescription);
+    }
+
+    public static Result saveRoadDescription(int id) {
+        String eventRoadDescription = null;
+        JsonNode json = request().body().asJson();
+        if(json == null) {
+            return badRequest("Expecting Json data");
+        } else {
+            eventRoadDescription = json.findPath("road_description").getTextValue();
+            if(eventRoadDescription == null) {
+                return badRequest("Missing parameter [road_description]");
+            }
+        }
+
+        Event event = (Event)Event.find().byId(id);
+        event.road_description = eventRoadDescription;
+        event.save();
+        return ok("Saved: " + eventRoadDescription);
     }
   
 }

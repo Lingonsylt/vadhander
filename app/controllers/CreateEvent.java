@@ -11,7 +11,7 @@ import views.html.createevent.index;
 import java.util.List;
 
 public class CreateEvent extends Controller {
-  
+    @Security.Authenticated(Secured.class)
     public static Result index() {
         Form<Event> eventForm = Form.form(Event.class);
         return ok(index.render(eventForm));
@@ -28,29 +28,27 @@ public class CreateEvent extends Controller {
         user.birthyear = 1990;
         user.email = "user@name.com";
         user.save();
-        /*
+
         Form<Event> eventForm = Form.form(Event.class);
-        Event newEvent = eventForm.bindFromRequest().get();
-        */
-        Event newEvent = new Event();
-        newEvent.caption = Form.form().bindFromRequest().get("eveName");
-        newEvent.description = Form.form().bindFromRequest().get("eveDesc");
-        List<String> stringTags = Tag.parseStringToList(Form.form().bindFromRequest().get("eveTags"));
-        newEvent.tags = Tag.getTagList(stringTags);
-        newEvent.creator = user;
+        eventForm = eventForm.bindFromRequest();
 
-        // TODO: Get this data from the form instead of hardcoding it
-        // http://open.mapquestapi.com/nominatim/v1/search/se/Isafjordsgatan%2039,%20Kista?format=json
-        newEvent.latitude = 59.4055219f;
-        newEvent.longitude = 17.9448913f;
-        newEvent.save();
-
-        for (Tag t : newEvent.tags) { // bind event to tags to allow searching
-            t.event.add(newEvent);
-            t.save();
+        if(eventForm.hasErrors())
+            return ok(index.render(eventForm));
+        else{
+            Event newEvent = eventForm.get();
+            newEvent.creator = user;
+            newEvent.time_created = newEvent.time_created.now();
+            // TODO: Get this data from the form instead of hardcoding it
+            // http://open.mapquestapi.com/nominatim/v1/search/se/Isafjordsgatan%2039,%20Kista?format=json
+            newEvent.latitude = 59.4055219f;
+            newEvent.longitude = 17.9448913f;
+            List<String> stringTags = Tag.parseStringToList(Form.form().bindFromRequest().get("eveTags"));
+            for (String str : stringTags) {
+                newEvent.tags.add(new Tag(str,newEvent));
+            }
+            newEvent.save();
+            return redirect(routes.ViewEvent.index(newEvent.id)); // send user to the newly created event's view
         }
-
-        return redirect(routes.ViewEvent.index(newEvent.id)); // send user to the newly created event's view
     }
   
 }

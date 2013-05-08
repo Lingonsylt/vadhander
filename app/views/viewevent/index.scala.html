@@ -6,6 +6,7 @@
     @if(event != null){
         <div class="event-title-div">
             <h1>@event.caption</h1>
+            <input type="button" id="attendButton" name="@event.id" onclick="attendEvent()" class="btn btn-info" value="attend this event"/>
         </div>
 
         <div class="event-content-box">
@@ -28,27 +29,31 @@
             @if(event.description == null && event.road_description == null) {
                 <p class="lead">Ingen beskrivning finns för detta evenemang.</p>
             } else {
+                <h3>Beskrivning</h3>
+                <input data-event-id="@event.id" type="button" class="btn btn-info" value="Redigera" id="edit-description-button"
+                    onclick="editDescription()" />
                 @if(event.description != null) {
-                    <h3>Beskrivning</h3>
-                    <input type="button" class="btn btn-info" value="Redigera" id="edit-description-button"
-                        onclick="editDescription()" />
                     <p id="description">@event.description</p>
                     <small>@event.tagString</small>
+                } else {
+                    <p id="description">Det finns ingen beskrivning till eventet.</p>
                 }
         </div>
         <div class="event-content-box" id="road-description-div">
+                <h3>Vägbeskrivning</h3>
+                <input data-event-id="@event.id" type="button" class="btn btn-info" value="Redigera" id="edit-road-description-button"
+                    onclick="editRoadDescription()" />
                 @if(event.road_description != null) {
-                    <h3>Vägbeskrivning</h3>
-                    <input type="button" class="btn btn-info" value="Redigera" id="edit-road-description-button"
-                        onclick="editRoadDescription()" />
                     <p id="road-description">@event.road_description</p>
+                } else {
+                    <p id="road-description">Det finns ingen vägbeskrivning till eventet.</p>
                 }
             }
         </div>
 
-       @* <div class="event-content-box">
+       <div class="event-content-box">
             <h3>Deltagare</h3>
-            <h4>@(event.attending.size())st</h4>  <!-- Hitta totalt antal deltagare för ett event -->
+            <h4>@(event.attending.size())st</h4>
             <div class="event-participants">
                 <table class="table table-condensed">
                     <tr>
@@ -56,12 +61,12 @@
                     </tr>
                     @for(attending : Attending <- event.attending){
                         <tr>
-                            <td><a href="#">@(attending.user.getFullName())</a></td>
+                            <td class="text-info">@(attending.user.getFullName())</td>
                         </tr>
-                    }         *@
-        <!--        </table>
+                    }
+               </table>
             </div>
-        </div>  -->
+        </div>
 
 
         <!-- <div class="event-content-box">

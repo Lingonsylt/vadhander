@@ -19,7 +19,7 @@ public class Event extends Model {
     public String description;
     public String road_description;
 
-    @ManyToMany
+    @OneToMany(cascade = CascadeType.ALL)
     public List<Tag> tags = new ArrayList<Tag>();
 
     public String tagString() {
@@ -28,6 +28,23 @@ public class Event extends Model {
             out+="#"+t.text;
         }
         return out;
+    }
+
+    public void attend(){
+        User user = new User();
+        user.username = "attendee"+attending.size();
+        user.firstname = "Attender";
+        user.lastname = "Lastname";
+        user.password = "supersecret";
+        user.birthyear = 1990;
+        user.email = "attend@mail.com";
+        user.save();
+        Attending att = new Attending();
+        att.event=this;
+        att.user = user;
+        att.save();
+        attending.add(att);
+        save();
     }
     /**
      * Update the PostGIS coord column for this Event-object in the database based on its latitude and longitude

@@ -38,11 +38,18 @@ public class User extends Model {
     @OneToMany
     public List<Comment> comments;
 
+    @OneToMany
+    public List<TagSubscription> tagSubscriptions;
+
     @OneToMany(cascade=CascadeType.ALL)
     public List<Attending> attending;
 
     @ManyToOne(optional = false)
     public List<User> friends;
+
+    public static User authenticate(String email, String password) {
+        return (User)User.find().where().eq("email",email).eq("password",password).findUnique();
+    }
 
     public static Finder find() {
         return new Model.Finder(Integer.class, User.class);
@@ -71,6 +78,37 @@ public class User extends Model {
 
     public String getLastName() {
         return lastname;
+    }
+
+    public void addTagSubscription(String tag) {
+        List<TagSubscription> foundTags = TagSubscription.find().where().eq("user.id", this.id).eq("tagText", tag).findList();
+        if (foundTags.size() == 1) {
+            return;
+        } else {
+            TagSubscription tagSubscription = new TagSubscription();
+            tagSubscription.user = this;
+            tagSubscription.tagText = tag;
+            tagSubscription.save();
+        }
+    }
+
+    public boolean removeTagSubscription(String tag) {
+        List<TagSubscription> foundTags = TagSubscription.find().where().eq("user.id", this.id).eq("tagText", tag).findList();
+        if (foundTags.size() == 1) {
+            foundTags.get(0).delete();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public List<String> getSubscribedTags() {
+        List<String> resultingTags = new ArrayList<String>();
+        List<TagSubscription> foundTags = TagSubscription.find().where().eq("user.id", this.id).findList();
+        for (TagSubscription tagSubscription : foundTags) {
+                resultingTags.add(tagSubscription.tagText);
+        }
+        return resultingTags;
     }
 
     public int getBirthyear() {

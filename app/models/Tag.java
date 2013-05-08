@@ -9,18 +9,22 @@ import java.util.List;
 @Entity
 public class Tag extends Model {
     @Id
+    public int id;
+
+    @ManyToOne
+    public Event event;
     public String text;
 
-    @ManyToMany
-    public List<Event> event;
-    public Tag(){
-        event = new ArrayList<Event>();
+    public Tag(String t, Event e) {
+        text = t;
+        event = e;
     }
 
     public static Finder find() {
-        return new Model.Finder(Integer.class, Tag.class);
+        return new Model.Finder(String.class, Tag.class);
     }
 
+    /*
     public static List<Tag> getTagList(List<String> stringTags) {
         List<Tag> tags = new ArrayList<Tag>();
         for (String str : stringTags) {
@@ -34,6 +38,7 @@ public class Tag extends Model {
         }
         return tags;
     }
+    */
 
     public static List<String> parseStringToList(String input) {
         List<String> output = new ArrayList<String>();
